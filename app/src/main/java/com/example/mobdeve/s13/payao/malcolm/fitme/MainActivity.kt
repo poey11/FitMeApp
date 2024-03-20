@@ -2,8 +2,11 @@ package com.example.mobdeve.s13.payao.malcolm.fitme
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.Fragment
+import com.example.mobdeve.s13.payao.malcolm.fitme.fragments.CalendarFragment
+import com.example.mobdeve.s13.payao.malcolm.fitme.fragments.HistoryFragment
+import com.example.mobdeve.s13.payao.malcolm.fitme.fragments.HomeFragment
+import com.example.mobdeve.s13.payao.malcolm.fitme.fragments.UserFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
