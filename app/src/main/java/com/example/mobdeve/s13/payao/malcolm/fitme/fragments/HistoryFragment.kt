@@ -4,13 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.ExerciseAdapter
 import com.example.mobdeve.s13.payao.malcolm.fitme.database.ExerciseDataHelper
-import com.example.mobdeve.s13.payao.malcolm.fitme.Exercise
+import com.example.mobdeve.s13.payao.malcolm.fitme.models.Exercise
 
 class HistoryFragment : Fragment() {
 

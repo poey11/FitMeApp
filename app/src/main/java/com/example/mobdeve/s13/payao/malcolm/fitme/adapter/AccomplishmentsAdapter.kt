@@ -3,8 +3,8 @@ package com.example.mobdeve.s13.payao.malcolm.fitme.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobdeve.s13.payao.malcolm.fitme.Accomplishment
-import com.example.mobdeve.s13.payao.malcolm.fitme.AccomplishmentViewHolder
+import com.example.mobdeve.s13.payao.malcolm.fitme.models.Accomplishment
+import com.example.mobdeve.s13.payao.malcolm.fitme.models.AccomplishmentViewHolder
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
 
 

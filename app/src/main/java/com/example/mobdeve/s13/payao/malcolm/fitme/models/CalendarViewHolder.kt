@@ -1,8 +1,9 @@
-package com.example.mobdeve.s13.payao.malcolm.fitme
+package com.example.mobdeve.s13.payao.malcolm.fitme.models
 
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobdeve.s13.payao.malcolm.fitme.R
 import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.CalendarAdapter.OnItemListener
 
 class CalendarViewHolder(itemView: View, private val onItemListener: OnItemListener) :

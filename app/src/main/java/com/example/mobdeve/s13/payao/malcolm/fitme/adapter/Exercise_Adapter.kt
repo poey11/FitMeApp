@@ -7,7 +7,7 @@ import android.view.ViewGroup
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
-import com.example.mobdeve.s13.payao.malcolm.fitme.Exercise  // Assuming you have a model for Exercise
+import com.example.mobdeve.s13.payao.malcolm.fitme.models.Exercise  // Assuming you have a model for Exercise
 import com.example.mobdeve.s13.payao.malcolm.fitme.models.ExerciseViewHolder
 
 class ExerciseAdapter(private val data: ArrayList<Exercise>, private val context: Context) : RecyclerView.Adapter<ExerciseViewHolder>() {

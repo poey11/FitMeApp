@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobdeve.s13.payao.malcolm.fitme.Exercise
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
 
 class ExerciseViewHolder(exerciseView: View, private val context: Context) : RecyclerView.ViewHolder(exerciseView) {

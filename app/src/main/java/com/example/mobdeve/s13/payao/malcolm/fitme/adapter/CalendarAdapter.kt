@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobdeve.s13.payao.malcolm.fitme.CalendarViewHolder
+import com.example.mobdeve.s13.payao.malcolm.fitme.models.CalendarViewHolder
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
 
 class CalendarAdapter(

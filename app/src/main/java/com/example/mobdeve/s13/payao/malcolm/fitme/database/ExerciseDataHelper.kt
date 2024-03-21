@@ -1,6 +1,6 @@
 package com.example.mobdeve.s13.payao.malcolm.fitme.database
 
-import com.example.mobdeve.s13.payao.malcolm.fitme.Exercise
+import com.example.mobdeve.s13.payao.malcolm.fitme.models.Exercise
 
 class ExerciseDataHelper {
     companion object {
