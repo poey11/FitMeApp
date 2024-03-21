@@ -1,9 +1,11 @@
-package com.example.mobdeve.s13.payao.malcolm.fitme
+package com.example.mobdeve.s13.payao.malcolm.fitme.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobdeve.s13.payao.malcolm.fitme.CalendarViewHolder
+import com.example.mobdeve.s13.payao.malcolm.fitme.R
 
 class CalendarAdapter(
     private val daysOfMonth: ArrayList<String>,

@@ -14,11 +14,5 @@ class AccomplishmentViewHolder(accomplishmentView: View, private val context: Co
     fun bind(accomplishment: Accomplishment) {
         titleTextView.text = accomplishment.title
 
-        itemView.setOnClickListener {
-            val position = adapterPosition
-            if (position != RecyclerView.NO_POSITION) {
-                Toast.makeText(context, "${accomplishment.title} clicked at position: $position", Toast.LENGTH_SHORT).show()
-            }
-        }
     }
 }

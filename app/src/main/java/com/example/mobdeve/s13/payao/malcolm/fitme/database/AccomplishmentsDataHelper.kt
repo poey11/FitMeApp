@@ -1,4 +1,6 @@
-package com.example.mobdeve.s13.payao.malcolm.fitme
+package com.example.mobdeve.s13.payao.malcolm.fitme.database
+
+import com.example.mobdeve.s13.payao.malcolm.fitme.Accomplishment
 
 
 class AccomplishmentsDataHelper {

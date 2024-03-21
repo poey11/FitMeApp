@@ -62,6 +62,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.AccomplishmentsAdapter
+import com.example.mobdeve.s13.payao.malcolm.fitme.database.AccomplishmentsDataHelper
+import com.example.mobdeve.s13.payao.malcolm.fitme.database.UserDataHelper
 
 class UserFragment : Fragment() {
 
