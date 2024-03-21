@@ -1,15 +1,16 @@
 package com.example.mobdeve.s13.payao.malcolm.fitme.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobdeve.s13.payao.malcolm.fitme.database.DataHelper
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
+import com.example.mobdeve.s13.payao.malcolm.fitme.CreateNewWorkout
 import com.example.mobdeve.s13.payao.malcolm.fitme.models.Workout
 import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.WorkoutAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -38,7 +39,8 @@ class HomeFragment : Fragment() {
         val fab: FloatingActionButton = view.findViewById(R.id.floatingActionButton)
 
         fab.setOnClickListener {
-            Toast.makeText(requireContext(), "BOBO MO DERRICK", Toast.LENGTH_SHORT).show()
+            val intent = Intent(requireContext(), CreateNewWorkout::class.java)
+            startActivity(intent)
         }
 
         setupRecyclerView()
