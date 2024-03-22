@@ -63,7 +63,7 @@
         android:drawableLeft="@drawable/ic_baseline_magnify"
         android:drawablePadding="5dp"
         android:drawableTint="#433535"
-        android:ems="13"
+        android:ems="18"
         android:hint="Search for exercise"
         android:inputType="text"
         android:paddingStart="15dp"
@@ -78,6 +78,7 @@
     <Button
         android:id="@+id/createNewExerciseBtn"
 
+        android:ems="20"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:drawableLeft="@drawable/ic_baseline_add_circle"
@@ -88,5 +89,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.252" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:text="All Exercise"
+        android:textSize="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.354" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="409dp"
+        android:layout_height="441dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

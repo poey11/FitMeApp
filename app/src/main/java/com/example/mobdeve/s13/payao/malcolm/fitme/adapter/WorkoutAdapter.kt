@@ -26,6 +26,12 @@ class WorkoutAdapter(private val data: ArrayList<Workout>, private val context: 
         holder.bind(workout)
     }
 
+    fun removeWorkoutItem(position: Int){
+        if(position >=0 && position < data.size){
+            data.removeAt(position)
+            notifyItemRemoved(position)
+        }
+    }
 
 
 }

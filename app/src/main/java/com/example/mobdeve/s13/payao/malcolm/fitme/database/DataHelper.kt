@@ -9,42 +9,49 @@ class DataHelper {
             workout.add(
                 Workout(
                     1,
-                    "Bicep Workout",
+                    "Bicep",
                     arrayOf("M","T","W")
                 )
             )
             workout.add(
                 Workout(
                     2,
-                    "Back Workout",
+                    "Back",
                     arrayOf("TH","F","SA")
                 )
             )
             workout.add(
                 Workout(
                     3,
-                    "Chest Workout",
+                    "Chest",
                     arrayOf("SU", "M", "W")
                 )
             )
             workout.add(
                 Workout(
                     4,
-                    "Legs Workout",
+                    "Legs",
                     arrayOf("M", "W", "F")
                 )
             )
             workout.add(
                 Workout(
                     5,
-                    "Calves Workout",
+                    "Calves",
                     arrayOf("T", "TH", "SA")
                 )
             )
             workout.add(
                 Workout(
                     6,
-                    "Shoulders Workout",
+                    "Shoulders",
+                    arrayOf("SU", "W")
+                )
+            )
+            workout.add(
+                Workout(
+                    7,
+                    "Hamstrings",
                     arrayOf("SU", "W")
                 )
             )

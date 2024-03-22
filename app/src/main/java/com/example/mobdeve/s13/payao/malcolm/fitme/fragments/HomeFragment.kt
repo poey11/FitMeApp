@@ -6,11 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobdeve.s13.payao.malcolm.fitme.database.DataHelper
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
-import com.example.mobdeve.s13.payao.malcolm.fitme.CreateNewWorkout
+import com.example.mobdeve.s13.payao.malcolm.fitme.activities.CreateNewWorkout
 import com.example.mobdeve.s13.payao.malcolm.fitme.models.Workout
 import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.WorkoutAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -37,6 +38,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val fab: FloatingActionButton = view.findViewById(R.id.floatingActionButton)
+
 
         fab.setOnClickListener {
             val intent = Intent(requireContext(), CreateNewWorkout::class.java)
