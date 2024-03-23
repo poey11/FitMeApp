@@ -14,7 +14,7 @@ class WorkoutAdapter(private val data: ArrayList<Workout>, private val context: 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.workout_template, parent, false)
-        return WorkoutViewHolder(view,context)
+        return WorkoutViewHolder(view,context,this)
     }
 
     override fun getItemCount(): Int {
@@ -27,10 +27,10 @@ class WorkoutAdapter(private val data: ArrayList<Workout>, private val context: 
     }
 
     fun removeWorkoutItem(position: Int){
-        if(position >=0 && position < data.size){
+
             data.removeAt(position)
             notifyItemRemoved(position)
-        }
+
     }
 
 

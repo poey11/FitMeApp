@@ -11,17 +11,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
 import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.WorkoutAdapter
 
-class WorkoutViewHolder(workoutView: View, private val context:Context ): RecyclerView.ViewHolder(workoutView){
+class WorkoutViewHolder(workoutView: View, private val context:Context,private var workoutAdapter: WorkoutAdapter  ): RecyclerView.ViewHolder(workoutView){
 
     private  val workoutTitle:TextView =  workoutView.findViewById(R.id.workoutTitle)
     private  val workoutDays:TextView =  workoutView.findViewById(R.id.workoutDates)
     private val workFrame:FrameLayout = workoutView.findViewById(R.id.workFrame)
     private  val deleteBtn: Button = workoutView.findViewById(R.id.deleteBtn)
     private lateinit var currentWorkout: Workout
-    fun bind(workout: Workout){
-        currentWorkout = workout
-        workoutTitle.text = workout.workoutTitle
-        workoutDays.text = workout.workoutDays.joinToString(" ")
+
+    init {
         workFrame.setOnClickListener{
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
@@ -31,9 +29,15 @@ class WorkoutViewHolder(workoutView: View, private val context:Context ): Recycl
         deleteBtn.setOnClickListener{
             val position = adapterPosition
             if(position != RecyclerView.NO_POSITION) {
-
+                workoutAdapter.removeWorkoutItem(position)
             }
         }
+    }
+    fun bind(workout: Workout){
+        currentWorkout = workout
+        workoutTitle.text = workout.workoutTitle
+        workoutDays.text = workout.workoutDays.joinToString(" ")
+
 
     }
 
