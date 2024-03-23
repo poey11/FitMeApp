@@ -24,5 +24,6 @@ class ExerciseAdapter(private val data: ArrayList<Exercise>, private val context
     override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
         val exercise: Exercise = data[position]
         holder.bind(exercise)
+
     }
 }

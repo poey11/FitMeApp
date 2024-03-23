@@ -1,11 +1,12 @@
 package com.example.mobdeve.s13.payao.malcolm.fitme.models
 
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
+import com.example.mobdeve.s13.payao.malcolm.fitme.HistoryFragment
 
 class ExerciseViewHolder(exerciseView: View, private val context: Context) : RecyclerView.ViewHolder(exerciseView) {
 
@@ -16,10 +17,18 @@ class ExerciseViewHolder(exerciseView: View, private val context: Context) : Rec
         currentExercise = exercise
         exerciseTitle.text = exercise.exerciseTitle
         itemView.setOnClickListener {
-            val position = adapterPosition
-            if (position != RecyclerView.NO_POSITION) {
-                Toast.makeText(context, "${exerciseTitle.text} clicked at position: $position", Toast.LENGTH_SHORT).show()
-            }
+            val intent = Intent(context, Stats::class.java) // Replace StatsActivity with your actual activity name
+            context.startActivity(intent)
         }
+
+        itemView.setOnClickListener {
+            val intent = Intent(context, Stats::class.java)
+            intent.putExtra("exerciseTitle", currentExercise.exerciseTitle)
+            context.startActivity(intent)
+        }
+
     }
+
+
+
 }

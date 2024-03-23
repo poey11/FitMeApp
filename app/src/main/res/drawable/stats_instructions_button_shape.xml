@@ -1,0 +1,6 @@
+<!-- rectangular_button_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/purple" />  <!-- You can change the color here -->
+    <corners android:radius="8dp"/> <!-- You can adjust the radius for rounded corners -->
+</shape>
