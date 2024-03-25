@@ -6,4 +6,5 @@ class Exercise (
     val reps: Int,
     val sets: Int,
     val KG: Int,
+    val instruction: String // Add instruction field
 )

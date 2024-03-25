@@ -24,6 +24,7 @@ class ExerciseViewHolder(exerciseView: View, private val context: Context) : Rec
         itemView.setOnClickListener {
             val intent = Intent(context, Stats::class.java)
             intent.putExtra("exerciseTitle", currentExercise.exerciseTitle)
+            intent.putExtra("instruction", currentExercise.instruction)
             context.startActivity(intent)
         }
 

@@ -13,7 +13,7 @@ import com.example.mobdeve.s13.payao.malcolm.fitme.models.ExerciseViewHolder
 class ExerciseAdapter(private val data: ArrayList<Exercise>, private val context: Context) : RecyclerView.Adapter<ExerciseViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.history_template, parent, false) // Assuming you have a layout named item_exercise.xml for each item
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.history_template, parent, false)
         return ExerciseViewHolder(view, context)
     }
 
