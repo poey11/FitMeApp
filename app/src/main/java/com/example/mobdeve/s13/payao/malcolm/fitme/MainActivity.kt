@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.mobdeve.s13.payao.malcolm.fitme.fragments.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.mobdeve.s13.payao.malcolm.fitme.fragments.UserFragment
+
 
 class MainActivity : AppCompatActivity() {
 

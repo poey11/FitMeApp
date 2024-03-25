@@ -69,26 +69,42 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/nameTV"
+                    android:id="@+id/firstNameTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Malcolm Payao"
-                    android:textColor="#FFFFFF"
                     android:fontFamily="@font/josefin_sans_semibold"
+                    android:text="Name"
+                    android:textColor="#FFFFFF"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.084"
+                    app:layout_constraintHorizontal_bias="0.096"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.194" />
+                    app:layout_constraintVertical_bias="0.19" />
+
+                <TextView
+                    android:id="@+id/lastNameTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/josefin_sans_semibold"
+                    android:text="Name"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.386"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.19" />
 
                 <TextView
                     android:id="@+id/sessionsValueTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="31"
+                    android:text="0"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
                     android:fontFamily="@font/josefin_sans"
@@ -104,31 +120,31 @@
                     android:id="@+id/volumeValueTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="45, 018"
-                    android:textColor="#FFFFFF"
                     android:fontFamily="@font/josefin_sans"
+                    android:text="0"
+                    android:textColor="#FFFFFF"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.439"
+                    app:layout_constraintHorizontal_bias="0.467"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.459" />
+                    app:layout_constraintVertical_bias="0.458" />
 
                 <TextView
                     android:id="@+id/repsValueTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5, 594"
-                    android:textColor="#FFFFFF"
                     android:fontFamily="@font/josefin_sans"
+                    android:text="0"
+                    android:textColor="#FFFFFF"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.885"
+                    app:layout_constraintHorizontal_bias="0.858"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.454" />
+                    app:layout_constraintVertical_bias="0.458" />
 
                 <TextView
                     android:id="@+id/settingsTV"

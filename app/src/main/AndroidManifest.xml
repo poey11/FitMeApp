@@ -26,6 +26,17 @@
         <activity android:name=".models.Instructions" />
 
 
+
+        <activity android:name=".models.Settings" />
+        <activity android:name=".models.EditProfile" />
+        <activity android:name=".models.Account" />
+        <activity android:name=".models.ChangeAccountSettings" />
+
+        <activity android:name=".activities.CreateNewWorkout">
+        </activity>
+
+        <activity android:name=".activities.ViewWorkout">
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
