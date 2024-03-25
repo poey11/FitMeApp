@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.core.content.ContextCompat
 import android.graphics.Color
+import com.example.mobdeve.s13.payao.malcolm.fitme.models.CalendarViewHolder
 import java.util.*
 
 
@@ -55,10 +56,5 @@ class CalendarAdapter(
         fun onItemClick(position: Int, dayText: String?)
     }
 }
-
-
-
-
-
 
 

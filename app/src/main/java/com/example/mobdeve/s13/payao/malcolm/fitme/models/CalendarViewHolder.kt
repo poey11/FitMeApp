@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
-import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.CalendarAdapter.OnItemListener
+import com.example.mobdeve.s13.payao.malcolm.fitme.CalendarAdapter.OnItemListener
 
 class CalendarViewHolder(itemView: View, private val onItemListener: OnItemListener) :
     RecyclerView.ViewHolder(itemView), View.OnClickListener {
