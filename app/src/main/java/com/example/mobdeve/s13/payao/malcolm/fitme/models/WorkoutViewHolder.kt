@@ -1,17 +1,13 @@
 package com.example.mobdeve.s13.payao.malcolm.fitme.models
 
-import android.content.Context
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
 import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.WorkoutAdapter
-
-class WorkoutViewHolder(workoutView: View, private val context:Context,private var workoutAdapter: WorkoutAdapter  ): RecyclerView.ViewHolder(workoutView){
+class WorkoutViewHolder(workoutView: View,private var workoutAdapter: WorkoutAdapter  ): RecyclerView.ViewHolder(workoutView){
 
     private  val workoutTitle:TextView =  workoutView.findViewById(R.id.workoutTitle)
     private  val workoutDays:TextView =  workoutView.findViewById(R.id.workoutDates)
@@ -23,7 +19,7 @@ class WorkoutViewHolder(workoutView: View, private val context:Context,private v
         workFrame.setOnClickListener{
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                Toast.makeText(context,"${workoutTitle.text} clicked at position: $position", Toast.LENGTH_SHORT).show()
+                workoutAdapter.openWorkoutItem(position)
             }
         }
         deleteBtn.setOnClickListener{
@@ -37,7 +33,6 @@ class WorkoutViewHolder(workoutView: View, private val context:Context,private v
         currentWorkout = workout
         workoutTitle.text = workout.workoutTitle
         workoutDays.text = workout.workoutDays.joinToString(" ")
-
 
     }
 
