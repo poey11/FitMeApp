@@ -3,6 +3,7 @@ package com.example.mobdeve.s13.payao.malcolm.fitme.models
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
+import android.widget.Toast
 import android.widget.EditText
 import android.widget.Button
 import com.example.mobdeve.s13.payao.malcolm.fitme.database.UserDataHelper
@@ -40,6 +41,7 @@ class ChangeAccountSettings : AppCompatActivity() {
         // Set click listener for Save button
         saveBtn.setOnClickListener {
             // Add logic to save changes
+            Toast.makeText(this, "Information saved", Toast.LENGTH_SHORT).show()
         }
     }
 }
