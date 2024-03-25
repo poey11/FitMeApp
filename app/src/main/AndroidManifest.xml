@@ -22,6 +22,11 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".models.Settings" />
+        <activity android:name=".models.EditProfile" />
+        <activity android:name=".models.Account" />
+        <activity android:name=".models.ChangeAccountSettings" />
+
         <activity android:name=".activities.CreateNewWorkout">
         </activity>
 
