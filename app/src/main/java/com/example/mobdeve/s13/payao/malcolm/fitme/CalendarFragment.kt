@@ -16,7 +16,6 @@ import kotlin.collections.ArrayList
 import androidx.recyclerview.widget.LinearLayoutManager
 
 
-
 class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener {
 
     private lateinit var monthYearText: TextView
