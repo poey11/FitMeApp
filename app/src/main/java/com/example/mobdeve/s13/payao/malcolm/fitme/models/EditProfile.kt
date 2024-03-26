@@ -16,6 +16,7 @@ class EditProfile : AppCompatActivity() {
     private lateinit var weightInputET: EditText
     private lateinit var heightInputET: EditText
     private lateinit var saveBtn: Button
+    private lateinit var backBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +30,7 @@ class EditProfile : AppCompatActivity() {
         heightInputET = findViewById(R.id.heightInputET)
 
         saveBtn = findViewById(R.id.saveBtn)
+        backBtn = findViewById(R.id.backBtn)
 
         // Retrieve user data from UserDataHelper
         val users = UserDataHelper.initializeUserData()
@@ -46,6 +48,10 @@ class EditProfile : AppCompatActivity() {
         saveBtn.setOnClickListener {
             // Add logic to save changes
             Toast.makeText(this, "Information saved", Toast.LENGTH_SHORT).show()
+        }
+
+        backBtn.setOnClickListener {
+            finish()
         }
     }
 }
