@@ -8,16 +8,28 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="361dp"
         android:layout_height="311dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="133dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="287dp"
         android:background="@drawable/stats_instructions_button_shape"
-        tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="133dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="264dp"
             android:layout_height="61dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="46dp"
+            android:layout_marginEnd="47dp"
+            android:layout_marginBottom="204dp"
             android:orientation="vertical"
-            tools:layout_editor_absoluteX="50dp"
-            tools:layout_editor_absoluteY="46dp">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/textView2"
@@ -41,13 +53,52 @@
                 android:textSize="15sp" />
         </LinearLayout>
 
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="74dp"
+            android:layout_height="61dp"
+            android:layout_marginStart="71dp"
+            android:layout_marginTop="159dp"
+            android:layout_marginEnd="216dp"
+            android:layout_marginBottom="91dp"
+            android:drawableLeft="@drawable/thumbs_up"
+            android:drawableTint="@color/white"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="74dp"
+            android:layout_height="61dp"
+            android:layout_marginStart="216dp"
+            android:layout_marginTop="159dp"
+            android:layout_marginEnd="71dp"
+            android:layout_marginBottom="91dp"
+            android:drawableLeft="@drawable/thumbs_up"
+            android:drawableTint="@color/white"
+            android:gravity="center"
+            android:rotation="180"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/button4"
         android:layout_width="331dp"
         android:layout_height="72dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="469dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="190dp"
         android:text="Submit"
-        tools:layout_editor_absoluteX="44dp"
-        tools:layout_editor_absoluteY="469dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
