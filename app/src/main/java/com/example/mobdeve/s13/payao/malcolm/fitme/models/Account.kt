@@ -9,6 +9,7 @@ import com.example.mobdeve.s13.payao.malcolm.fitme.R
 class Account : AppCompatActivity() {
 
     private lateinit var changeAccountSettingsbtn: Button
+    private lateinit var backBtn: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,11 +18,16 @@ class Account : AppCompatActivity() {
 
         // Initialize Edit Profile button
         changeAccountSettingsbtn = findViewById(R.id.changeAccountSettingsbtn)
+        backBtn = findViewById(R.id.backBtn)
 
         // Set click listener for Edit Profile button
         changeAccountSettingsbtn.setOnClickListener {
             val intent = Intent(this, ChangeAccountSettings ::class.java)
             startActivity(intent)
+        }
+
+        backBtn.setOnClickListener {
+            finish()
         }
     }
 }

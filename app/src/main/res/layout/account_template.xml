@@ -6,6 +6,24 @@
     android:layout_height="match_parent">
 
     <Button
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#fef7ff"
+        android:drawableLeft="@drawable/ic_baseline_arrow"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:paddingLeft="18dp"
+        android:text="Back"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.043" />
+
+    <Button
         android:id="@+id/FitMebtn"
         android:layout_width="145dp"
         android:layout_height="49dp"
@@ -64,7 +82,7 @@
             android:layout_height="62dp"
             android:backgroundTint="#fef7ff"
             android:text="Change Account Settings"
-            android:fontFamily="@font/josefin_sans"
+            android:fontFamily="@font/josefin_sans_semibold"
             android:textAlignment="textStart"
             android:textColor="#000000" />
 
@@ -80,7 +98,7 @@
             android:layout_height="60dp"
             android:backgroundTint="#fef7ff"
             android:text="Delete Account"
-            android:fontFamily="@font/josefin_sans"
+            android:fontFamily="@font/josefin_sans_semibold"
             android:textAlignment="textStart"
             android:textColor="#000000" />
 
