@@ -1,4 +1,4 @@
-package com.example.mobdeve.s13.payao.malcolm.fitme
+package com.example.mobdeve.s13.payao.malcolm.fitme.models
 
 class ScheduledExercise (
     val exerciseId: Int,

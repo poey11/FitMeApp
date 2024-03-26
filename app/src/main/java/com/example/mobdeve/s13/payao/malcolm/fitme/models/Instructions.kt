@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobdeve.s13.payao.malcolm.fitme.HistoryFragment
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
 import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.StatsAdapter
 import com.example.mobdeve.s13.payao.malcolm.fitme.database.ExerciseDataHelper
@@ -100,9 +101,14 @@ class Instructions : AppCompatActivity() {
 
         // Set OnClickListener to the statsBtn button
         statsBtn.setOnClickListener {
-            // Launch the Stats activity with exercise title as an extra
 
             finish()
         }
+
+        val backBtn: Button = findViewById(R.id.backBtn)
+        backBtn.setOnClickListener{
+            finish()
+        }
+
     }
 }

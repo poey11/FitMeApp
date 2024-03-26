@@ -13,14 +13,34 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="129dp"
         android:layout_marginBottom="674dp"
-        android:text="Exercise"
         android:fontFamily="@font/josefin_sans"
+        android:text="Exercise"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="301dp"
+        android:layout_marginBottom="667dp"
+        android:backgroundTint="#fef7ff"
+        android:drawableLeft="@drawable/ic_baseline_arrow"
+        android:fontFamily="@font/josefin_sans_semibold"
+        android:paddingStart="18dp"
+        android:text="Back"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
 
     <LinearLayout
         android:layout_width="414dp"
@@ -38,8 +58,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/josefin_sans"
             android:background="@drawable/stats_instructions_button_shape"
+            android:fontFamily="@font/josefin_sans"
             android:text="Stats" />
 
         <Button
@@ -47,8 +67,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/josefin_sans"
             android:background="@drawable/stats_instructions_button_shape"
+            android:fontFamily="@font/josefin_sans"
             android:text="Instructions" />
     </LinearLayout>
 
@@ -73,9 +93,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/josefin_sans"
                 android:gravity="center"
                 android:text="Session"
-                android:fontFamily="@font/josefin_sans"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 tools:visibility="visible" />
@@ -85,8 +105,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:fontFamily="@font/josefin_sans"
+                android:gravity="center"
                 android:text="Reps"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -96,8 +116,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:fontFamily="@font/josefin_sans"
+                android:gravity="center"
                 android:text="KG"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -112,9 +132,9 @@
         android:layout_marginTop="244dp"
         android:layout_marginEnd="3dp"
         android:layout_marginBottom="231dp"
+        android:fontFamily="@font/josefin_sans"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:fontFamily="@font/josefin_sans"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

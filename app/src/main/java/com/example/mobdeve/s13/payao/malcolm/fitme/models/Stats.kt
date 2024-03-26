@@ -99,6 +99,12 @@ class Stats : AppCompatActivity() {
             intent.putExtra("instruction", instruction)
             startActivity(intent)
         }
+
+        val backBtn: Button = findViewById(R.id.backBtn)
+
+        backBtn.setOnClickListener{
+            finish()
+        }
     }
 }
 

@@ -1,10 +1,13 @@
-package com.example.mobdeve.s13.payao.malcolm.fitme
+package com.example.mobdeve.s13.payao.malcolm.fitme.adapter
 
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobdeve.s13.payao.malcolm.fitme.R
+import com.example.mobdeve.s13.payao.malcolm.fitme.models.ScheduledExerciseViewHolder
+import com.example.mobdeve.s13.payao.malcolm.fitme.models.ScheduledExercise
 
 
 class ScheduledExerciseAdapter(private val exercises: ArrayList<ScheduledExercise>) :
