@@ -30,6 +30,7 @@
 
         <activity android:name=".activities.RegisterActivity"/>
         <activity android:name=".activities.ForgotActivity"/>
+        <activity android:name=".activities.Login"/>
         <activity android:name=".models.Settings" />
         <activity android:name=".models.EditProfile" />
         <activity android:name=".models.Account" />
