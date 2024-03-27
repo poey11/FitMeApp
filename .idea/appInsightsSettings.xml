@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.mobdeve.s13.payao.malcolm.fitme" />
+                  <option name="mobileSdkAppId" value="1:817353722869:android:24e130c93234555c996ebc" />
+                  <option name="projectId" value="fitme-aa32e" />
+                  <option name="projectNumber" value="817353722869" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

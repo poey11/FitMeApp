@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "817353722869",
+    "project_id": "fitme-aa32e",
+    "storage_bucket": "fitme-aa32e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817353722869:android:24e130c93234555c996ebc",
+        "android_client_info": {
+          "package_name": "com.example.mobdeve.s13.payao.malcolm.fitme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "817353722869-55popq15p5lg18dm7toueivd2h6cg504.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mobdeve.s13.payao.malcolm.fitme",
+            "certificate_hash": "4ce3c2a58e469dbcf5789542281b7366def0cb7d"
+          }
+        },
+        {
+          "client_id": "817353722869-6r9f6d122399j0i3k33u05jrk9s6c5of.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmMCX4Eg2I4BsbmgkpaZvAjwjWwRTHP9g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "817353722869-6r9f6d122399j0i3k33u05jrk9s6c5of.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
