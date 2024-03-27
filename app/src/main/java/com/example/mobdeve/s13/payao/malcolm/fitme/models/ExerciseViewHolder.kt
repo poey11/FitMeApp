@@ -8,10 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
 import com.example.mobdeve.s13.payao.malcolm.fitme.HistoryFragment
 
+
+
+
 class ExerciseViewHolder(exerciseView: View, private val context: Context) : RecyclerView.ViewHolder(exerciseView) {
 
     private val exerciseTitle: TextView = exerciseView.findViewById(R.id.exerciseTitle)
     private lateinit var currentExercise: Exercise
+
 
     fun bind(exercise: Exercise) {
         currentExercise = exercise
@@ -30,6 +34,8 @@ class ExerciseViewHolder(exerciseView: View, private val context: Context) : Rec
 
     }
 
-
-
 }
+
+
+
+

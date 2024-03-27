@@ -8,16 +8,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
-import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.CircuitAdapter
+import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.CExerciseAdapter
 import com.example.mobdeve.s13.payao.malcolm.fitme.models.Circuit
 import com.example.mobdeve.s13.payao.malcolm.fitme.models.Workout
 
-class ViewWorkout:AppCompatActivity(){
+
+class ViewWorkout : AppCompatActivity() {
 
     private lateinit var workoutTitle: TextView
     private lateinit var recyclerView: RecyclerView
-    private lateinit var circuitAdapter: CircuitAdapter
-    private lateinit var linearLayout: LinearLayoutManager
+    private lateinit var cExerciseAdapter: CExerciseAdapter
+
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,28 +27,26 @@ class ViewWorkout:AppCompatActivity(){
 
         recyclerView = findViewById(R.id.circuitRecyclerView)
         workoutTitle = findViewById(R.id.textView2)
-        val currentCircuit = intent.getSerializableExtra("currentWorkout") as? Workout
+        val currentWorkout = intent.getSerializableExtra("currentWorkout") as? Workout
 
-
-        if (currentCircuit != null) {
-            workoutTitle.text = currentCircuit.workoutTitle
-            setupRecyclerView(currentCircuit.circuit)
-
+        if (currentWorkout != null) {
+            workoutTitle.text = currentWorkout.workoutTitle
+            setupRecyclerView(currentWorkout.circuit)
         }
 
         val backBtn: Button = findViewById(R.id.button4)
 
-        backBtn.setOnClickListener{
+        backBtn.setOnClickListener {
             finish()
         }
-
     }
 
-    private fun setupRecyclerView(data: Array<Circuit>){
-        linearLayout = LinearLayoutManager(this)
-        recyclerView.layoutManager = linearLayout
-        circuitAdapter = CircuitAdapter(data,this)
-        recyclerView.adapter=circuitAdapter
+    private fun setupRecyclerView(data: Array<Circuit>) {
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        cExerciseAdapter = CExerciseAdapter(data.flatMap { it.setOfExercise }, index = 0)
+        recyclerView.adapter = cExerciseAdapter
     }
+
+
 
 }

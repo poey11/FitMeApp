@@ -30,7 +30,7 @@ class Settings : AppCompatActivity() {
         }
 
         accountbtn.setOnClickListener {
-            val intent = Intent(this, Account::class.java)
+            val intent = Intent(this, ChangeAccountSettings::class.java)
             startActivity(intent)
         }
 

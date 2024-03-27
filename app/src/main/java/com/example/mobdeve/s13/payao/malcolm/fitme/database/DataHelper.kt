@@ -8,8 +8,6 @@ class DataHelper {
     companion object{
         fun initializeWorkout(): ArrayList<Workout>{
             val workout = ArrayList<Workout>()
-            val circuit= ArrayList<Circuit>()
-            val exercise = ArrayList<C_exercise>()
             workout.add(
                 Workout(
                     1,
