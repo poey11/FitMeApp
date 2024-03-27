@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.mobdeve.s13.payao.malcolm.fitme"
+    >
 
     <application
         android:allowBackup="true"
@@ -26,7 +28,8 @@
         <activity android:name=".models.Instructions" />
 
 
-
+        <activity android:name=".activities.RegisterActivity"/>
+        <activity android:name=".activities.ForgotActivity"/>
         <activity android:name=".models.Settings" />
         <activity android:name=".models.EditProfile" />
         <activity android:name=".models.Account" />
