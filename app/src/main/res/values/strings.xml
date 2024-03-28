@@ -2,4 +2,23 @@
     <string name="app_name">FitMe</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="default_web_client_id">817353722869-6r9f6d122399j0i3k33u05jrk9s6c5of.apps.googleusercontent.com</string>
+
+    <string-array name="muscle">
+        <item>abdominals</item>
+        <item>abductors</item>
+        <item>adductors</item>
+        <item>biceps</item>
+        <item>calves</item>
+        <item>chest</item>
+        <item>forearms</item>
+        <item>glutes</item>
+        <item>hamstrings</item>
+        <item>lats</item>
+        <item>lower_back</item>
+        <item>middle_back</item>
+        <item>neck</item>
+        <item>quadriceps</item>
+        <item>traps</item>
+        <item>triceps</item>
+    </string-array>
 </resources>
