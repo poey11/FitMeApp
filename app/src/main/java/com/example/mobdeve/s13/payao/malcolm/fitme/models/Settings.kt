@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.mobdeve.s13.payao.malcolm.fitme.MainActivity
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
 import com.example.mobdeve.s13.payao.malcolm.fitme.fragments.UserFragment
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 
 class Settings : AppCompatActivity() {
@@ -22,7 +24,9 @@ class Settings : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_template)
-
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).
+        requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
+        mGoogleSignInClient = GoogleSignIn.getClient(this,gso )
 
         editProfilebtn = findViewById(R.id.editProfilebtn)
         accountbtn = findViewById(R.id.accountbtn)
@@ -42,9 +46,11 @@ class Settings : AppCompatActivity() {
         logoutBtn.setOnClickListener{
 
                 auth.signOut()
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                mGoogleSignInClient.signOut().addOnCompleteListener(this){
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
 
 
         }
