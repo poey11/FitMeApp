@@ -23,6 +23,7 @@ class CreateNewWorkout: AppCompatActivity() {
 
 }*/
 
+
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -34,7 +35,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 
-
+/*
 class CreateNewWorkout : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
@@ -66,6 +67,7 @@ class CreateNewWorkout : AppCompatActivity() {
         recyclerView.adapter = exerciseAdapter
     }
 
+
     private fun fetchExercises() {
         db.collection("exercises")
             .get()
@@ -81,6 +83,7 @@ class CreateNewWorkout : AppCompatActivity() {
                 // Handle errors
             }
     }
+
 
 
     private fun setupMuscleSpinner() {
@@ -105,4 +108,102 @@ class CreateNewWorkout : AppCompatActivity() {
         }
     }
 }
+ */
+
+class CreateNewWorkout : AppCompatActivity() {
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var exerciseAdapter: AddExerciseAdapter
+    private lateinit var autoCompleteTextView: AutoCompleteTextView
+    private lateinit var muscleSpinnerAdapter: ArrayAdapter<String>
+
+    // Firebase Firestore instance
+    private val db = FirebaseFirestore.getInstance()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.create_new_workout)
+
+        val backBtn: Button = findViewById(R.id.backBtn)
+        recyclerView = findViewById(R.id.recyclerView)
+        autoCompleteTextView = findViewById(R.id.autoCompleteTextView2)
+
+        backBtn.setOnClickListener {
+            finish()
+        }
+
+        setupRecyclerView()
+        setupMuscleSpinner()
+        fetchExercises()
+    }
+
+    private fun setupRecyclerView() {
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        exerciseAdapter = AddExerciseAdapter(emptyList())
+        recyclerView.adapter = exerciseAdapter
+    }
+
+    private fun fetchExercisesForMuscle(muscle: String?) {
+        if (muscle.isNullOrEmpty() || muscle == "all") {
+            // Fetch all exercises when no muscle group is specified
+            db.collection("exercises")
+                .get()
+                .addOnSuccessListener { result ->
+                    val exerciseNames = mutableListOf<String>()
+                    for (document in result) {
+                        val name = document.getString("name")
+                        name?.let { exerciseNames.add(it) }
+                    }
+                    exerciseAdapter.setData(exerciseNames)
+                }
+                .addOnFailureListener { exception ->
+                    // Handle errors
+                }
+        } else {
+            // Fetch exercises filtered by the specified muscle group
+            db.collection("exercises")
+                .whereEqualTo("muscle", muscle)
+                .get()
+                .addOnSuccessListener { result ->
+                    val exerciseNames = mutableListOf<String>()
+                    for (document in result) {
+                        val name = document.getString("name")
+                        name?.let { exerciseNames.add(it) }
+                    }
+                    exerciseAdapter.setData(exerciseNames)
+                }
+                .addOnFailureListener { exception ->
+                    // Handle errors
+                }
+        }
+    }
+
+
+    private fun fetchExercises() {
+        // Initially fetch all exercises
+        fetchExercisesForMuscle("")
+
+        // Listen for changes in the selected muscle group and fetch exercises accordingly
+        autoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
+            val selectedMuscle = parent.getItemAtPosition(position).toString()
+            fetchExercisesForMuscle(selectedMuscle)
+        }
+    }
+
+
+    private fun setupMuscleSpinner() {
+        // Get the muscle array from strings.xml
+        val muscleArray = resources.getStringArray(R.array.muscle)
+
+        // Create an ArrayAdapter using the muscle array
+        muscleSpinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, muscleArray)
+
+        // Specify the layout to use when the list of choices appears
+        muscleSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        // Apply the adapter to the AutoCompleteTextView
+        autoCompleteTextView.setAdapter(muscleSpinnerAdapter)
+    }
+}
+
 

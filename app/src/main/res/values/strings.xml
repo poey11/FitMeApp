@@ -4,6 +4,7 @@
     <string name="default_web_client_id">817353722869-6r9f6d122399j0i3k33u05jrk9s6c5of.apps.googleusercontent.com</string>
 
     <string-array name="muscle">
+        <item>all</item>
         <item>abdominals</item>
         <item>abductors</item>
         <item>adductors</item>
