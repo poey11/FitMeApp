@@ -2,6 +2,7 @@ package com.example.mobdeve.s13.payao.malcolm.fitme.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -102,6 +103,7 @@ class Login: AppCompatActivity() , LoginListener {
         val signInIntent = mGoogleSignInClient.signInIntent
         signInLauncher.launch(signInIntent)
     }
+
     private  var signInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result ->
         if(result.resultCode == RESULT_OK){
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
@@ -111,43 +113,57 @@ class Login: AppCompatActivity() , LoginListener {
 
     override fun handleSignInResult(task: Task<GoogleSignInAccount>) {
         try {
-            val account:GoogleSignInAccount? = task.result
-            if(account!=null){
-                val credential = GoogleAuthProvider.getCredential(account.idToken,null)
-                auth.signInWithCredential(credential).addOnCompleteListener{
-                    if(task.isSuccessful){
-                        val  uid= auth.currentUser?.uid ?:""
-                        if (uid !=""){
-                            usersCollection.whereEqualTo("UID",uid).get().addOnSuccessListener { documents ->
-                                if (documents.isEmpty) {
-                                    val fName = auth.currentUser?.displayName?.split(" ")?.get(0)?:""
-                                    val lName = auth.currentUser?.displayName?.split(" ")?.get(1)?:""
-
-                                    val googleUser = User(uid,fName,lName)
-
-                                    val userDoc = firestore.collection("userInfo").document(uid)
-                                    userDoc.set(googleUser).addOnSuccessListener{
-                                        Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-                                    }.addOnFailureListener{e ->
-                                        Toast.makeText(this, "Failed to add user data to Firestore: ${e.message}", Toast.LENGTH_SHORT).show()
-                                    }
-
-                                }else{
-                                    val intent = Intent(this,MainActivity::class.java)
-                                    startActivity(intent)
+            val account: GoogleSignInAccount? = task.result
+            if (account != null) {
+                val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                auth.signInWithCredential(credential).addOnCompleteListener { signInTask ->
+                    if(signInTask.isSuccessful) {
+                        val currentUser = auth.currentUser
+                        if(currentUser != null) {
+                            checkIfUserExists(currentUser.uid){exists ->
+                                if(exists){
+                                    startActivity(Intent(this, MainActivity::class.java))
                                     finish()
                                 }
+                                else{
+                                    val userData = hashMapOf(
+                                        "fName" to currentUser.displayName!!.split(" ")[0],
+                                        "lName" to currentUser.displayName!!.split(" ")[0],
+                                        "UID" to currentUser.uid
+                                    )
+                                    usersCollection.document(currentUser.uid).set(userData).addOnSuccessListener {
+                                        startActivity(Intent(this, MainActivity::class.java))
+                                        finish()
+                                    }.addOnFailureListener{ e->
+                                        Toast.makeText(this,"Failed to add to the DB ${e.message}",Toast.LENGTH_SHORT).show()
+                                    }
+                                }
                             }
+
                         }
+
                     }
                 }
-
             }
-        }
-        catch (e:ApiException){
-            Toast.makeText(this, "Sign-in failed", Toast.LENGTH_SHORT).show()
+        } catch (e: ApiException) {
+            Toast.makeText(this, "Sign-in failed: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
 
+    private fun checkIfUserExists(userId: String, callback : (Boolean) -> Unit){
+        usersCollection.document(userId).get().addOnSuccessListener{documentSnapshot ->
+            val exist = documentSnapshot.exists()
+            callback(exist)
+        }
+            .addOnFailureListener { e ->
+                Toast.makeText(
+                    this,
+                    "Failed to check user existence: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+                callback(false)
+            }
+
+    }
 
 }
