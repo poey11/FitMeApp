@@ -5,26 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/muscleGroup"
-        android:layout_width="169dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="224dp"
-        android:layout_marginTop="205dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="473dp"
-        android:background="@drawable/create_workout_searchbar"
-        android:drawablePadding="5dp"
-        android:drawableTint="#433535"
-        android:ems="18"
-        android:hint="Glutes"
-        android:inputType="text"
-        android:paddingStart="15dp"
-        android:textColor="#433535"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/backBtn"
@@ -59,28 +39,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
-    <EditText
-        android:id="@+id/searchExercise"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="91dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="592dp"
-        android:background="@drawable/create_workout_searchbar"
-        android:drawableLeft="@drawable/ic_baseline_magnify"
-        android:drawablePadding="5dp"
-        android:drawableTint="#433535"
-        android:ems="18"
-        android:hint="Search for exercise"
-        android:inputType="text"
-        android:paddingStart="15dp"
-        android:textColor="#433535"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/chooseExercise"
@@ -98,76 +56,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/addworkoutTitle"
-        android:layout_width="181dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="205dp"
-        android:layout_marginEnd="214dp"
-        android:layout_marginBottom="475dp"
-        android:background="@drawable/create_workout_searchbar"
-        android:drawablePadding="5dp"
-        android:drawableTint="#433535"
-        android:ems="18"
-        android:hint="Thursday workouts"
-        android:inputType="text"
-        android:paddingStart="15dp"
-        android:textColor="#433535"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/createNewExerciseBtn"
 
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="274dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginBottom="407dp"
         android:drawableLeft="@drawable/ic_baseline_add_circle"
         android:drawableTint="@color/white"
         android:ems="20"
         android:text="Create New Exercise"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.405" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="186dp"
         android:layout_height="35dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="163dp"
-        android:layout_marginEnd="209dp"
-        android:layout_marginBottom="533dp"
         android:fontFamily="@font/josefin_sans_semibold"
         android:text="Add Workout Title"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="0.229" />
 
     <TextView
         android:id="@+id/muscleTitle"
         android:layout_width="147dp"
         android:layout_height="32dp"
-        android:layout_marginStart="248dp"
-        android:layout_marginTop="163dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="536dp"
         android:fontFamily="@font/josefin_sans_semibold"
         android:text="Muscle Group"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.882"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.228" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -180,5 +112,56 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <SearchView
+        android:id="@+id/searchExerciseSearchView"
+        android:layout_width="375dp"
+        android:layout_height="44dp"
+        android:background="@drawable/create_workout_searchbar"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search for exercise"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.142" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+        android:layout_width="183dp"
+        android:layout_height="58dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.929"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.294">
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/create_workout_searchbar"
+            android:inputType="none"
+            android:text="Muscle Group" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="172dp"
+        android:layout_height="58dp"
+        android:background="@drawable/create_workout_searchbar"
+        android:ems="10"
+        android:hint="Workout Title"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.294" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
