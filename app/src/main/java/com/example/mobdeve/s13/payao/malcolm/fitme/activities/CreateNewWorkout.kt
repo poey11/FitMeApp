@@ -34,6 +34,8 @@ import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.AddExerciseAdapter
 import com.google.firebase.firestore.FirebaseFirestore
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.content.Intent
+
 
 /*
 class CreateNewWorkout : AppCompatActivity() {
@@ -127,6 +129,7 @@ class CreateNewWorkout : AppCompatActivity() {
         val backBtn: Button = findViewById(R.id.backBtn)
         recyclerView = findViewById(R.id.recyclerView)
         autoCompleteTextView = findViewById(R.id.autoCompleteTextView2)
+       val addNewExerciseBtn: Button = findViewById(R.id.createNewExerciseBtn)
 
         backBtn.setOnClickListener {
             finish()
@@ -135,7 +138,16 @@ class CreateNewWorkout : AppCompatActivity() {
         setupRecyclerView()
         setupMuscleSpinner()
         fetchExercises()
+
+        // Set click listener for the "Create New Exercise" button
+        addNewExerciseBtn.setOnClickListener {
+            // Navigate to the activity for adding a new exercise
+            startActivity(Intent(this, AddNewExerciseActivity::class.java))
+        }
+
     }
+
+
 
     private fun setupRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(this)

@@ -26,6 +26,7 @@
         <activity android:name=".models.Stats"/>
 
         <activity android:name=".models.Instructions" />
+        <activity android:name=".activities.AddNewExerciseActivity" />
 
 
         <activity android:name=".activities.RegisterActivity"/>
