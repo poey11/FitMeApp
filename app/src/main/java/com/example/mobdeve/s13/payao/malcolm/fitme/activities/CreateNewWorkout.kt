@@ -269,6 +269,7 @@ class CreateNewWorkout : AppCompatActivity() {
 
             // Save the workout title and selected exercises to Firestore
             saveWorkoutToFirestore()
+            finish()
         }
 
         backBtn.setOnClickListener {
@@ -333,7 +334,7 @@ class CreateNewWorkout : AppCompatActivity() {
         for (exercise in selectedExercises) {
             // Create exercise data
             val exerciseData = hashMapOf(
-                "EID" to exercise // Assuming EID field represents the name of the exercise
+                "ExerciseTitle" to exercise // Assuming EID field represents the name of the exercise
             )
 
             // Add exercise data to the document
