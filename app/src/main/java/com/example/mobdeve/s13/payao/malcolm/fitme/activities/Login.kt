@@ -22,7 +22,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
-import com.example.mobdeve.s13.payao.malcolm.fitme.models.User
+
 class Login: AppCompatActivity() , LoginListener {
 
     private lateinit var loginField: EditText
@@ -113,42 +113,67 @@ class Login: AppCompatActivity() , LoginListener {
 
     override fun handleSignInResult(task: Task<GoogleSignInAccount>) {
         try {
+            var firstName:String
+            var lastName :String
             val account: GoogleSignInAccount? = task.result
             if (account != null) {
                 val credential = GoogleAuthProvider.getCredential(account.idToken, null)
                 auth.signInWithCredential(credential).addOnCompleteListener { signInTask ->
-                    if(signInTask.isSuccessful) {
+                    if (signInTask.isSuccessful) {
                         val currentUser = auth.currentUser
-                        if(currentUser != null) {
-                            checkIfUserExists(currentUser.uid){exists ->
-                                if(exists){
+                        if (currentUser != null) {
+                            val photoUrl = currentUser.photoUrl?.toString()
+                            checkIfUserExists(currentUser.uid) { exists ->
+                                if (exists) {
                                     startActivity(Intent(this, MainActivity::class.java))
                                     finish()
-                                }
-                                else{
-                                    val userData = hashMapOf(
-                                        "fName" to currentUser.displayName!!.split(" ")[0],
-                                        "lName" to currentUser.displayName!!.split(" ")[0],
-                                        "UID" to currentUser.uid
-                                    )
-                                    usersCollection.document(currentUser.uid).set(userData).addOnSuccessListener {
-                                        startActivity(Intent(this, MainActivity::class.java))
-                                        finish()
-                                    }.addOnFailureListener{ e->
-                                        Toast.makeText(this,"Failed to add to the DB ${e.message}",Toast.LENGTH_SHORT).show()
+                                } else {
+                                    if(currentUser.displayName?.contains(" ") == true) {
+                                        val name = currentUser.displayName?.split(" ")
+                                        firstName = name?.get(0).toString()
+                                        lastName = name?.get(1).toString()
+                                    } else {
+                                        firstName = currentUser.displayName.toString()
+                                        lastName = ""
                                     }
+                                    val userData = hashMapOf(
+                                        "fullName" to "$firstName $lastName",
+                                        "UID" to currentUser.uid,
+                                        "Weight" to 0,
+                                        "Height" to 0,
+                                        "Sessions" to 0,
+                                        "Volume" to 0,
+                                        "Reps" to 0,
+                                        "Age" to 0,
+                                        "photoUrl" to photoUrl
+                                    )
+                                    usersCollection.document(currentUser.uid).set(userData)
+                                        .addOnSuccessListener {
+                                            startActivity(Intent(this, MainActivity::class.java))
+                                            finish()
+                                        }.addOnFailureListener { e ->
+                                            Log.e("handleSignInResult", "Failed to add user to DB: ${e.message}", e)
+                                            Toast.makeText(
+                                                this,
+                                                "Failed to add to the DB ${e.message}",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
                                 }
                             }
-
                         }
-
+                    } else {
+                        Log.e("handleSignInResult", "Sign-in task failed with exception: ${signInTask.exception}", signInTask.exception)
+                        Toast.makeText(this, "Sign-in failed: ${signInTask.exception?.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         } catch (e: ApiException) {
+            Log.e("handleSignInResult", "ApiException encountered: ${e.message}", e)
             Toast.makeText(this, "Sign-in failed: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
+
 
     private fun checkIfUserExists(userId: String, callback : (Boolean) -> Unit){
         usersCollection.document(userId).get().addOnSuccessListener{documentSnapshot ->

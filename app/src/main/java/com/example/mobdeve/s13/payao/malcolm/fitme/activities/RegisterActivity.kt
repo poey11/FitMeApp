@@ -89,9 +89,15 @@ class RegisterActivity: AppCompatActivity() {
                 if (user != null){
                     val userDoc = firestore.collection("userInfo").document(user.uid)
                     val userData = hashMapOf(
-                        "fName" to fName,
-                        "lName" to lName,
-                        "UID" to user.uid
+                        "fullName" to "$fName $lName",
+                        "Weight" to 0,
+                        "Height" to 0,
+                        "Sessions" to 0,
+                        "Volume" to 0,
+                        "Reps" to 0,
+                        "UID" to user.uid,
+                        "Age" to 0,
+                        "photoUrl" to ""
                     )
                     userDoc.set(userData).addOnSuccessListener {
                         Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()

@@ -29,7 +29,7 @@ class Settings : AppCompatActivity() {
         mGoogleSignInClient = GoogleSignIn.getClient(this,gso )
 
         editProfilebtn = findViewById(R.id.editProfilebtn)
-        accountbtn = findViewById(R.id.accountbtn)
+
         backBtn = findViewById(R.id.backBtn)
         logoutBtn = findViewById(R.id.logoutbtn)
 
@@ -38,13 +38,8 @@ class Settings : AppCompatActivity() {
             startActivity(intent)
         }
 
-        accountbtn.setOnClickListener {
-            val intent = Intent(this, ChangeAccountSettings::class.java)
-            startActivity(intent)
-        }
 
         logoutBtn.setOnClickListener{
-
                 auth.signOut()
                 mGoogleSignInClient.signOut().addOnCompleteListener(this){
                     val intent = Intent(this, MainActivity::class.java)

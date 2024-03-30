@@ -91,16 +91,6 @@
             android:layout_height="1dp"
             android:background="?android:attr/listDivider" />
 
-        <Button
-            android:id="@+id/accountbtn"
-            android:layout_width="match_parent"
-            android:layout_height="63dp"
-            android:backgroundTint="#fef7ff"
-            android:text="Account"
-            android:fontFamily="@font/josefin_sans_semibold"
-            android:textAlignment="textStart"
-            android:textColor="#000000" />
-
         <View
             android:id="@+id/divider3"
             android:layout_width="match_parent"
