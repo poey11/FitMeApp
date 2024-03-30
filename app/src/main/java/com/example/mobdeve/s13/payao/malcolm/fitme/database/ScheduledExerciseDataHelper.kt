@@ -10,34 +10,34 @@ class ScheduledExerciseDataHelper {
 
             exercises.add(
                 ScheduledExercise(
-                    1,
+                    //1,
                     "Push-up",
-                    20
+                    //20
 
                     )
             )
 
             exercises.add(
                 ScheduledExercise(
-                    2,
+                    //2,
                     "Pull-up",
-                    10
+                    //10
                     )
             )
 
             exercises.add(
                 ScheduledExercise(
-                    3,
+                   // 3,
                     "Squats",
-                    20
+                   // 20
                     )
             )
 
             exercises.add(
                 ScheduledExercise(
-                    4,
+                   // 4,
                     "Crunches",
-                    20
+                   // 20
                 )
             )
 

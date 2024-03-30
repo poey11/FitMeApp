@@ -15,7 +15,9 @@ import java.util.*
 import kotlin.collections.ArrayList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.ScheduledExerciseAdapter
-import com.example.mobdeve.s13.payao.malcolm.fitme.database.ScheduledExerciseDataHelper
+import com.example.mobdeve.s13.payao.malcolm.fitme.models.ScheduledExercise
+import com.google.firebase.firestore.FirebaseFirestore
+import android.util.Log
 
 
 class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener {
@@ -114,6 +116,7 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener {
 
 
 
+    /*
     class MyBottomSheetDialogFragment : BottomSheetDialogFragment() {
         override fun onCreateView(
             inflater: LayoutInflater,
@@ -151,5 +154,77 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener {
                 return fragment
             }
         }
+    }*/
+
+
+    class MyBottomSheetDialogFragment : BottomSheetDialogFragment() {
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View? {
+            val view = inflater.inflate(R.layout.calendar_bottomsheet, container, false)
+
+            // Initialize the RecyclerView
+            val recyclerView = view.findViewById<RecyclerView>(R.id.scheduledExercises)
+
+            // Set the layout manager for your RecyclerView
+            val layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.layoutManager = layoutManager
+
+            // Initialize the adapter with an empty list
+            val adapter = ScheduledExerciseAdapter(ArrayList())
+
+            // Set the adapter to your RecyclerView
+            recyclerView.adapter = adapter
+
+            // Fetch exercises from the database
+            fetchExercises(adapter)
+
+            return view
+        }
+
+
+        private fun fetchExercises(adapter: ScheduledExerciseAdapter) {
+            // Access your Firebase Firestore instance
+            val db = FirebaseFirestore.getInstance()
+
+            // Fetch exercises from Firestore
+            db.collection("exercises")
+                .get()
+                .addOnSuccessListener { result ->
+                    val exercises = mutableListOf<ScheduledExercise>()
+
+                    // Iterate through the result documents
+                    for (document in result) {
+                        // Extract exercise data from Firestore document
+                        val name = document.getString("name") ?: ""
+                        // Create a ScheduledExercise object with just the name
+                        val scheduledExercise = ScheduledExercise(name)
+                        exercises.add(scheduledExercise)
+                    }
+
+                    // Convert the MutableList to an ArrayList
+                    val exercisesArrayList = ArrayList(exercises)
+
+                    // Update the adapter with the fetched exercises
+                    adapter.setData(exercisesArrayList)
+                }
+                .addOnFailureListener { exception ->
+                    // Handle errors
+                    Log.e("MyBottomSheet", "Error fetching exercises: $exception")
+                }
+        }
+        companion object {
+            fun newInstance(dayText: String): MyBottomSheetDialogFragment {
+                val fragment = MyBottomSheetDialogFragment()
+                val args = Bundle()
+                args.putString("selectedDay", dayText)
+                fragment.arguments = args
+                return fragment
+            }
+        }
     }
 }
+
+
