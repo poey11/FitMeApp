@@ -27,4 +27,11 @@ class ScheduledExerciseAdapter(private val exercises: ArrayList<ScheduledExercis
     override fun getItemCount(): Int {
         return exercises.size
     }
+
+    // Method to update the data of the adapter
+    fun setData(newList: ArrayList<ScheduledExercise>) {
+        exercises.clear() // Clear the existing list
+        exercises.addAll(newList) // Add all items from the new list
+        notifyDataSetChanged() // Notify the adapter that the data has changed
+    }
 }
