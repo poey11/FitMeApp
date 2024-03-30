@@ -34,14 +34,16 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="129dp"
         android:layout_marginBottom="674dp"
-        android:text="Exercise"
         android:fontFamily="@font/josefin_sans"
-        android:textSize="40sp"
+        android:text="Exercise"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.636" />
 
     <LinearLayout
         android:layout_width="414dp"
@@ -58,66 +60,59 @@
             android:id="@+id/statsBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/josefin_sans"
             android:layout_weight="1"
             android:background="@drawable/stats_instructions_button_shape"
+            android:fontFamily="@font/josefin_sans"
             android:text="Stats" />
 
         <Button
             android:id="@+id/instructionsBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/josefin_sans"
             android:layout_weight="1"
             android:background="@drawable/stats_instructions_button_shape"
+            android:fontFamily="@font/josefin_sans"
             android:text="Instructions" />
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="198dp"
-        android:layout_height="176dp"
-        android:layout_marginTop="174dp"
-        android:layout_marginBottom="381dp"
-        android:background="@android:color/transparent"
-        android:scaleType="centerInside"
+
+    <ScrollView
+        android:layout_width="380dp"
+        android:layout_height="566dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/youtube" />
+        app:layout_constraintVertical_bias="0.903">
 
-
-    <LinearLayout
-        android:layout_width="364dp"
-        android:layout_height="346dp"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="369dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/instructionTv"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="364dp"
             android:layout_height="wrap_content"
-            android:text="POINT OF PERFORMANCE"
-            android:fontFamily="@font/josefin_sans"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_marginStart="23dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/instructionstepsTv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20sp"
-            android:fontFamily="@font/josefin_sans"
-            android:text="Instructions"
-            android:textSize="20sp" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/instructionTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/josefin_sans"
+                android:text="POINT OF PERFORMANCE"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/instructionstepsTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:fontFamily="@font/josefin_sans"
+                android:gravity="fill_horizontal"
+                android:text="Instructions"
+                android:textAlignment="viewStart"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
