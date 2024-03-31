@@ -17,5 +17,6 @@ class Workout(
 class Workout(
     val workoutTitle: String = "",
     val workoutDays: Array<String> = emptyArray(),
-    val circuit: Array<Circuit> = emptyArray()
+    val circuit: Array<Circuit> = emptyArray(),
+    val workoutID: String
 ): Serializable

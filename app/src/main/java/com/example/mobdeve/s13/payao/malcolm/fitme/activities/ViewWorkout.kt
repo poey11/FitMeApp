@@ -76,7 +76,7 @@ class ViewWorkout : AppCompatActivity() {
 
         if (currentWorkout != null) {
             workoutTitle.text = currentWorkout.workoutTitle
-            fetchListOfExercises(currentWorkout.workoutTitle)
+            fetchListOfExercises(currentWorkout.workoutID)
         }
 
         val backBtn: Button = findViewById(R.id.button4)
@@ -99,7 +99,7 @@ class ViewWorkout : AppCompatActivity() {
                 .collection("listOfExercises")
                 .get()
                 .addOnSuccessListener { documents ->
-                    /*
+
                     val exerciseTitlesList = mutableListOf<String>()
                     for (document in documents) {
                         // Parse exercise data from Firestore document
@@ -108,7 +108,7 @@ class ViewWorkout : AppCompatActivity() {
                             exerciseTitlesList.add(exerciseTitle)
                         }
 
-                     */
+
                     // Log the list of exercise titles
                  //   Log.d("retrieved exercises" "Exercise Titles List: ${documents})
 

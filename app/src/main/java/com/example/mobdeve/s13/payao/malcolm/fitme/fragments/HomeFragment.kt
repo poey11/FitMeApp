@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
                         val workoutDays = document.get("daysSet") as? String
 
                         if (workoutTitle != null && workoutDays != null) {
-                            val workout = Workout(workoutTitle, arrayOf(workoutDays), emptyArray())
+                            val workout = Workout(workoutTitle, arrayOf(workoutDays), emptyArray(),document.id)
                             workouts.add(workout)
                         }
                     }
