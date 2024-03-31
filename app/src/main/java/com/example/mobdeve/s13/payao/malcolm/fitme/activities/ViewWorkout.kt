@@ -188,7 +188,7 @@ class ViewWorkout : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var exerciseTitles: List<String>
     private lateinit var exerciseAdapter: CExerciseAdapter
-
+    private val auth = FirebaseAuth.getInstance()
 
     private val db = FirebaseFirestore.getInstance()
 
@@ -200,6 +200,7 @@ class ViewWorkout : AppCompatActivity() {
         recyclerView = findViewById(R.id.circuitRecyclerView)
         workoutTitle = findViewById(R.id.textView2)
         val currentWorkout = intent.getSerializableExtra("currentWorkout") as? Workout
+        val currentWorkoutID= intent.getStringExtra("clickedWorkoutID")
 
         // Retrieve the clicked workout title from the intent extras
         val clickedWorkoutTitle = intent.getStringExtra("clickedWorkoutTitle")
@@ -210,9 +211,15 @@ class ViewWorkout : AppCompatActivity() {
             fetchListOfExercises(currentWorkout.workoutID)
         }
 
+
         if (!clickedWorkoutTitle.isNullOrEmpty()) {
             workoutTitle.text = clickedWorkoutTitle
-            fetchListOfExercises(clickedWorkoutTitle) // Fetch exercises for the clicked workout title
+            if (currentWorkoutID != null) {
+                fetchListOfExercises(currentWorkoutID)
+                Log.e("JUSTINEEEE", currentWorkoutID)
+            } else {
+                Log.e("JUSTINEEEE", "Current Workout ID is null")
+            }
         }
 
         val backBtn: Button = findViewById(R.id.button4)
@@ -225,8 +232,9 @@ class ViewWorkout : AppCompatActivity() {
     }
 
 
+
     private fun fetchListOfExercises(clickedWorkoutTitle: String) {
-        val currentUser = FirebaseAuth.getInstance().currentUser
+        val currentUser = auth.currentUser
         val uid = currentUser?.uid
 
         uid?.let {

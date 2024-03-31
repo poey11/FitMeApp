@@ -19,7 +19,6 @@ import com.example.mobdeve.s13.payao.malcolm.fitme.models.ScheduledExercise
 import com.google.firebase.firestore.FirebaseFirestore
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
-import android.widget.Toast
 import android.content.Intent
 import com.example.mobdeve.s13.payao.malcolm.fitme.activities.ViewWorkout
 
@@ -313,10 +312,11 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener, ScheduledEx
     }
 
     // Handle click event for workout titles
-    override fun onWorkoutTitleClick(workoutTitle: String) {
+    override fun onWorkoutTitleClick(workoutTitle: String, workoutID:String) {
         // Start ViewWorkout activity with the workout title
         val intent = Intent(requireContext(), ViewWorkout::class.java)
-        intent.putExtra("clickedWorkoutTitle", workoutTitle) // Pass the clicked workout title
+        intent.putExtra("clickedWorkoutTitle", workoutTitle)
+        intent.putExtra("clickedWorkoutID", workoutID)
         startActivity(intent)
     }
 
@@ -372,7 +372,7 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener, ScheduledEx
                             val workoutTitle = document.getString("workoutTitle")
                             workoutTitle?.let {
                                 // Create a ScheduledExercise object with the workout title
-                                val scheduledExercise = ScheduledExercise(it)
+                                val scheduledExercise = ScheduledExercise(it, document.id)
                                 exercises.add(scheduledExercise)
                             }
                         }
