@@ -28,6 +28,7 @@ class ScheduledExerciseAdapter(private val exercises: ArrayList<ScheduledExercis
         holder.itemView.setOnClickListener {
             listener.onWorkoutTitleClick(exercise.workoutTitle)
         }
+
     }
 
     override fun getItemCount(): Int {
@@ -44,4 +45,5 @@ class ScheduledExerciseAdapter(private val exercises: ArrayList<ScheduledExercis
     interface OnWorkoutTitleClickListener {
         fun onWorkoutTitleClick(workoutTitle: String)
     }
+
 }
