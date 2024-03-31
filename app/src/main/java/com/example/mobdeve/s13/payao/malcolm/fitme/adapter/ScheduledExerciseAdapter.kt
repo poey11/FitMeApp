@@ -10,7 +10,8 @@ import com.example.mobdeve.s13.payao.malcolm.fitme.models.ScheduledExerciseViewH
 import com.example.mobdeve.s13.payao.malcolm.fitme.models.ScheduledExercise
 
 
-class ScheduledExerciseAdapter(private val exercises: ArrayList<ScheduledExercise>) :
+
+class ScheduledExerciseAdapter(private val exercises: ArrayList<ScheduledExercise>, private val listener: OnWorkoutTitleClickListener) :
     RecyclerView.Adapter<ScheduledExerciseViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduledExerciseViewHolder {
@@ -22,6 +23,11 @@ class ScheduledExerciseAdapter(private val exercises: ArrayList<ScheduledExercis
     override fun onBindViewHolder(holder: ScheduledExerciseViewHolder, position: Int) {
         val exercise = exercises[position]
         holder.bind(exercise)
+
+        // Set click listener for the workout title
+        holder.itemView.setOnClickListener {
+            listener.onWorkoutTitleClick(exercise.workoutTitle)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -33,5 +39,9 @@ class ScheduledExerciseAdapter(private val exercises: ArrayList<ScheduledExercis
         exercises.clear() // Clear the existing list
         exercises.addAll(newList) // Add all items from the new list
         notifyDataSetChanged() // Notify the adapter that the data has changed
+    }
+
+    interface OnWorkoutTitleClickListener {
+        fun onWorkoutTitleClick(workoutTitle: String)
     }
 }
