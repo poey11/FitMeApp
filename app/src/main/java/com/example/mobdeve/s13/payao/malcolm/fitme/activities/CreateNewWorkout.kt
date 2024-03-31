@@ -26,7 +26,7 @@ class CreateNewWorkout : AppCompatActivity() {
     private lateinit var muscleSpinnerAdapter: ArrayAdapter<String>
     private lateinit var searchExerciseSearchView: SearchView
 
-    // Firebase Firestore instance
+
     private val db = FirebaseFirestore.getInstance()
 
     // Define variables to hold workout title and selected exercises
@@ -57,7 +57,6 @@ class CreateNewWorkout : AppCompatActivity() {
 
             // Save the workout title and selected exercises to Firestore
             saveWorkoutToFirestore()
-
             finish()
         }
 
@@ -92,7 +91,7 @@ class CreateNewWorkout : AppCompatActivity() {
 
             // Create a new workout document in the "listOfWorkouts" subcollection
             val listOfWorkoutsData = hashMapOf(
-                "daysSet" to "Everyday", // Set daysSet field to "Everyday"
+                "daysSet" to "M T W TH F SA SU", // Set daysSet field to "Everyday"
                 "workoutTitle" to workoutTitle // Set workoutTitle field to the workout title
             )
 
@@ -247,6 +246,8 @@ class CreateNewWorkout : AppCompatActivity() {
         autoCompleteTextView.setAdapter(muscleSpinnerAdapter)
     }
 }
+
+
 
 
 
