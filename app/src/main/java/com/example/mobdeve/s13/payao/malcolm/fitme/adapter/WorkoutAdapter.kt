@@ -61,5 +61,11 @@ class WorkoutAdapter(private val data: ArrayList<Workout>, private val context: 
         return data[position]
     }
 
+    fun setData(newData: ArrayList<Workout>) {
+        data.clear()
+        data.addAll(newData)
+        notifyDataSetChanged()
+    }
+
 
 }
