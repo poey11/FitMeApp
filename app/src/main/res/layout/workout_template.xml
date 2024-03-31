@@ -62,72 +62,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
 
-                <View
-                    android:id="@+id/MonView"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="25dp"
-                    android:background="@drawable/ic_baseline_white_cancel"
-                    android:backgroundTint="@color/white" />
-
-                <View
-                    android:id="@+id/TueView"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="-4dp"
-                    android:background="@drawable/ic_baseline_filled_check"
-                    android:backgroundTint="@color/white" />
-
-
-                <View
-                    android:id="@+id/WedView"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="-4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_baseline_filled_check"
-                    android:backgroundTint="@color/white" />
-
-                <View
-                    android:id="@+id/ThursView"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_baseline_filled_check"
-                    android:backgroundTint="@color/white" />
-
-                <View
-                    android:id="@+id/FriView"
-                    android:layout_width="25dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="-3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_baseline_empty_circle2"
-                    android:backgroundTint="@color/white" />
-
-                <View
-                    android:id="@+id/SatView"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="-2dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_baseline_empty_circle2"
-                    android:backgroundTint="@color/white" />
-
-                <View
-                    android:id="@+id/SunView"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="2dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_baseline_empty_circle2"
-                    android:backgroundTint="@color/white" />
-            </LinearLayout>
 
         </LinearLayout>
 

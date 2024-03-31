@@ -115,7 +115,6 @@ class ViewWorkout : AppCompatActivity() {
                     }
 
 
-
                     // Update RecyclerView adapter with the retrieved list of exercise titles
                     updateRecyclerView(exerciseTitlesList)
                 }
