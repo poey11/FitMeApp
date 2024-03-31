@@ -6,15 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.core.content.ContextCompat.startActivity
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
 import com.example.mobdeve.s13.payao.malcolm.fitme.activities.ViewWorkout
 import com.example.mobdeve.s13.payao.malcolm.fitme.models.Workout
 import com.example.mobdeve.s13.payao.malcolm.fitme.models.WorkoutViewHolder
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 
 interface WorkoutItemClickListener {
     fun onDeleteClicked(position: Int)
@@ -61,7 +58,7 @@ class WorkoutAdapter(private val data: ArrayList<Workout>, private val context: 
         return data[position]
     }
 
-    fun setData(newData: ArrayList<Workout>) {
+    fun setData(newData: List<Workout>) {
         data.clear()
         data.addAll(newData)
         notifyDataSetChanged()

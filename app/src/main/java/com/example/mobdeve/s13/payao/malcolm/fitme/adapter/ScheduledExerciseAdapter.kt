@@ -21,7 +21,9 @@ class ScheduledExerciseAdapter(private val exercises: ArrayList<ScheduledExercis
     }
 
     override fun onBindViewHolder(holder: ScheduledExerciseViewHolder, position: Int) {
+        exercises.sortBy { it.workoutTitle }
         val exercise = exercises[position]
+
         holder.bind(exercise)
 
         // Set click listener for the workout title

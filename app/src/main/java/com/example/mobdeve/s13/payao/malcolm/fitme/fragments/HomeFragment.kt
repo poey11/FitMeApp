@@ -1,6 +1,5 @@
 package com.example.mobdeve.s13.payao.malcolm.fitme.fragments
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,20 +7,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 //import com.example.mobdeve.s13.payao.malcolm.fitme.database.DataHelper
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
 import com.example.mobdeve.s13.payao.malcolm.fitme.activities.CreateNewWorkout
-import com.example.mobdeve.s13.payao.malcolm.fitme.activities.ViewWorkout
 import com.example.mobdeve.s13.payao.malcolm.fitme.models.Workout
 import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.WorkoutAdapter
-import com.example.mobdeve.s13.payao.malcolm.fitme.models.Circuit
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.CExerciseAdapter
 import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.WorkoutItemClickListener
 
 
@@ -209,8 +204,10 @@ class HomeFragment : Fragment(), WorkoutItemClickListener {
                             workouts.add(workout)
                         }
                     }
+                    val sortedWorkouts = workouts.sortedBy { it.workoutTitle }
+
                     // Update RecyclerView with retrieved workouts
-                    workoutAdapter.setData(workouts)
+                    workoutAdapter.setData(sortedWorkouts)
                     workoutAdapter.notifyDataSetChanged()
                 }
                 .addOnFailureListener { exception ->
