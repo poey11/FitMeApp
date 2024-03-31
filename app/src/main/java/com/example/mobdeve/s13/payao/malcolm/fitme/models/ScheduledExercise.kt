@@ -9,4 +9,6 @@ class ScheduledExercise (
 )*/
 
 
-data class ScheduledExercise(val name: String)
+//data class ScheduledExercise(val name: String)
+
+class ScheduledExercise(val workoutTitle: String)

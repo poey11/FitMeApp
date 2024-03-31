@@ -10,6 +10,6 @@ class ScheduledExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(item
     private val exerciseNameTextView: TextView = itemView.findViewById(R.id.exerciseNameTextView)
 
     fun bind(exercise: ScheduledExercise) {
-        exerciseNameTextView.text = exercise.name
+        exerciseNameTextView.text = exercise.workoutTitle
     }
 }
