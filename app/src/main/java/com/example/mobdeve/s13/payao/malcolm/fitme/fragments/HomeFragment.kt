@@ -1,7 +1,9 @@
 package com.example.mobdeve.s13.payao.malcolm.fitme.fragments
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +11,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobdeve.s13.payao.malcolm.fitme.database.DataHelper
+//import com.example.mobdeve.s13.payao.malcolm.fitme.database.DataHelper
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
 import com.example.mobdeve.s13.payao.malcolm.fitme.activities.CreateNewWorkout
 import com.example.mobdeve.s13.payao.malcolm.fitme.activities.ViewWorkout
 import com.example.mobdeve.s13.payao.malcolm.fitme.models.Workout
 import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.WorkoutAdapter
+import com.example.mobdeve.s13.payao.malcolm.fitme.models.Circuit
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.CExerciseAdapter
 
 
 class HomeFragment : Fragment() {
@@ -23,13 +29,12 @@ class HomeFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var workoutAdapter: WorkoutAdapter
     private lateinit var linearManager: LinearLayoutManager
-    private lateinit var workout: ArrayList<Workout>
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         recyclerView = view.findViewById(R.id.recyclerView)
         return view
@@ -49,11 +54,48 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        this.workout = DataHelper.initializeWorkout()
-        linearManager = LinearLayoutManager(requireContext())
-        recyclerView.layoutManager = linearManager
-        workoutAdapter = WorkoutAdapter(workout, requireContext())
-        recyclerView.adapter = workoutAdapter
+        val workouts = ArrayList<Workout>()
 
+        // Get the current user's UID from FirebaseAuth
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val uid = currentUser?.uid
+
+        // Check if UID is not null before proceeding
+        uid?.let {
+            // Query Firestore collection "userExercise" to retrieve workout data for the current user
+            db.collection("userExercise").document(uid).collection("listOfWorkouts")
+                .get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        val workoutTitle = document.getString("workoutTitle")
+                        val workoutDays = document.get("daysSet") as? String
+
+                        if (workoutTitle != null && workoutDays != null) {
+                            val workout = Workout(workoutTitle, arrayOf(workoutDays), emptyArray())
+                            workouts.add(workout)
+                        }
+                    }
+
+                    // Populate RecyclerView with retrieved workouts
+                    linearManager = LinearLayoutManager(requireContext())
+                    recyclerView.layoutManager = linearManager
+                    workoutAdapter = WorkoutAdapter(workouts, requireContext())
+                    recyclerView.adapter = workoutAdapter
+                }
+                .addOnFailureListener { exception ->
+                    // Handle any errors
+                    Log.w(TAG, "Error getting documents: ", exception)
+                }
+        }
+    }
+
+
+    companion object {
+        private const val TAG = "HomeFragment"
     }
 }
+
+
+
+
+

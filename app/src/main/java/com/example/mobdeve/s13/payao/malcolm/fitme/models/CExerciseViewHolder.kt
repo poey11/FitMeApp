@@ -22,3 +22,13 @@ class CExerciseViewHolder(cExerciseView:View):RecyclerView.ViewHolder(cExerciseV
     }
 
 }
+
+/*
+class CExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private val tvExerciseTitle: TextView = itemView.findViewById(R.id.exerciseTitle)
+
+    fun bind(exerciseTitle: String) {
+        tvExerciseTitle.text = exerciseTitle
+    }
+}
+*/
