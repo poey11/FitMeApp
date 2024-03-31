@@ -11,4 +11,7 @@ class ScheduledExercise (
 
 //data class ScheduledExercise(val name: String)
 
-class ScheduledExercise(val workoutTitle: String)
+class ScheduledExercise(val workoutTitle: String,
+    val workoutID:String
+
+)
