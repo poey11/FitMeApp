@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.AccomplishmentsAdapter
-import com.example.mobdeve.s13.payao.malcolm.fitme.database.AccomplishmentsDataHelper
 import com.example.mobdeve.s13.payao.malcolm.fitme.database.UserDataHelper
 import com.example.mobdeve.s13.payao.malcolm.fitme.models.Settings
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
@@ -26,114 +25,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-/*
-class UserFragment : Fragment() {
-
-    private lateinit var accomplishmentsRecyclerView: RecyclerView
-    private lateinit var firstNameTV: TextView
-    private lateinit var lastNameTV: TextView
-    private lateinit var sessionsValueTV: TextView
-    private lateinit var volumeValueTV: TextView
-    private lateinit var repsValueTV: TextView
-    private lateinit var userIconImageView: ImageView
-    private lateinit var settingsbtn: ImageButton
-    private lateinit var userFirstName : String
-    private lateinit var userLastName :String
-
-    private  val auth:FirebaseAuth = FirebaseAuth.getInstance()
-    private val db =  FirebaseFirestore.getInstance()
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_user, container, false)
-
-        // Initialize TextViews
-        firstNameTV = view.findViewById(R.id.firstNameTV)
-        sessionsValueTV = view.findViewById(R.id.sessionsValueTV)
-        volumeValueTV = view.findViewById(R.id.volumeValueTV)
-        repsValueTV = view.findViewById(R.id.repsValueTV)
-
-        // Initialize ImageView for user icon
-        userIconImageView = view.findViewById(R.id.userIcon)
-
-        val currentUser = auth.currentUser
-
-        if (currentUser != null) {
-            fetchUser(currentUser.uid)
-            fetchAccomplishments(currentUser.uid)
-        }
-
-        // Get user data
-        val userDataList = UserDataHelper.initializeUserData()
-        val userData = userDataList[0]
-
-
-        // Set TextViews to user data
-
-
-        // Initialize RecyclerView
-        accomplishmentsRecyclerView = view.findViewById(R.id.accomplishmentsRecyclerView)
-        accomplishmentsRecyclerView.layoutManager = LinearLayoutManager(context)
-
-
-        // Initialize ImageButton for settings
-        settingsbtn = view.findViewById(R.id.settingsbtn)
-        settingsbtn.setOnClickListener {
-            val intent = Intent(requireContext(), Settings::class.java)
-            startActivity(intent)
-        }
-
-        return view
-    }
-
-    private fun fetchUser(uID: String){
-        db.collection("userInfo").whereEqualTo("UID",uID).get()
-            .addOnSuccessListener{result ->
-               if(!result.isEmpty){
-                   val document = result.documents[0]
-                   userFirstName = document.getString("fullName").toString()
-                   sessionsValueTV.text = document.getLong("Sessions").toString()
-                   volumeValueTV.text = document.getLong("Volume").toString()
-                   repsValueTV.text = document.getLong("Reps").toString()
-                   firstNameTV.text = userFirstName
-
-                   val photoUrl = document.getString("photoUrl")
-                   if (!photoUrl.isNullOrEmpty()) {
-                       // Using Glide for loading the image from URL
-                       Glide.with(this)
-                           .load(photoUrl)
-                           .placeholder(R.drawable.ic_baseline_user) // Placeholder image while loading
-                           .error(R.drawable.ic_baseline_user) // Error image if loading fails
-                           .into(userIconImageView)
-                   }
-               }
-
-            }.addOnFailureListener{exception ->
-                Log.e("WOAH", "Error getting user data $exception", exception)
-            }
-    }
-
-
-    private fun fetchAccomplishments(uID: String) {
-        db.collection("userExercise").document(uID).collection("listOfPastExercise").get()
-            .addOnSuccessListener { result ->
-                val accomplishmentsList = mutableListOf<Accomplishment>()
-                for (document in result.documents) {
-                    val title = document.getString("exTitle")
-                    if (!title.isNullOrEmpty()) {
-                        accomplishmentsList.add(Accomplishment(title))
-                    }
-                }
-                // Create and set adapter
-                val adapter = AccomplishmentsAdapter(accomplishmentsList)
-                accomplishmentsRecyclerView.adapter = adapter
-            }.addOnFailureListener { exception ->
-                Log.e("WOAH", "Error getting user accomplishments $exception", exception)
-            }
-    }
-
-}*/
 
 
 class UserFragment : Fragment() {
@@ -173,20 +64,16 @@ class UserFragment : Fragment() {
             fetchAccomplishments(currentUser.uid)
         }
 
-        // Get user data
         val userDataList = UserDataHelper.initializeUserData()
         val userData = userDataList[0]
 
 
-        // Set TextViews to user data
 
-
-        // Initialize RecyclerView
         accomplishmentsRecyclerView = view.findViewById(R.id.accomplishmentsRecyclerView)
         accomplishmentsRecyclerView.layoutManager = LinearLayoutManager(context)
 
 
-        // Initialize ImageButton for settings
+
         settingsbtn = view.findViewById(R.id.settingsbtn)
         settingsbtn.setOnClickListener {
             val intent = Intent(requireContext(), Settings::class.java)
@@ -209,11 +96,11 @@ class UserFragment : Fragment() {
 
                     val photoUrl = document.getString("photoUrl")
                     if (!photoUrl.isNullOrEmpty()) {
-                        // Using Glide for loading the image from URL
+
                         Glide.with(this)
                             .load(photoUrl)
-                            .placeholder(R.drawable.ic_baseline_user) // Placeholder image while loading
-                            .error(R.drawable.ic_baseline_user) // Error image if loading fails
+                            .placeholder(R.drawable.ic_baseline_user)
+                            .error(R.drawable.ic_baseline_user)
                             .into(userIconImageView)
                     }
                 }
@@ -224,24 +111,7 @@ class UserFragment : Fragment() {
     }
 
 
-    /*private fun fetchAccomplishments(uID: String) {
-        db.collection("userExercise").document(uID).collection("listOfPastExercise").get()
-            .addOnSuccessListener { result ->
-                val accomplishmentsList = mutableListOf<Accomplishment>()
-                for (document in result.documents) {
-                    val title = document.getString("exTitle")
-                    //val totalSessions = document.getLong("totalSessions")
-                    if (!title.isNullOrEmpty()) {
-                        accomplishmentsList.add(Accomplishment(title))
-                    }
-                }
-                // Create and set adapter
-                val adapter = AccomplishmentsAdapter(accomplishmentsList)
-                accomplishmentsRecyclerView.adapter = adapter
-            }.addOnFailureListener { exception ->
-                Log.e("WOAH", "Error getting user accomplishments $exception", exception)
-            }
-    }*/
+
 
     private fun fetchAccomplishments(uID: String) {
         db.collection("userExercise").document(uID).collection("listOfPastExercise").get()
@@ -250,21 +120,20 @@ class UserFragment : Fragment() {
                 for (document in result.documents) {
                     val title = document.getString("exTitle")
                     val totalSessions = document.getLong("totalSessions")
-                    if (!title.isNullOrEmpty() && totalSessions == 10L) {
-                        accomplishmentsList.add(Accomplishment(title))
+                    val badgeImgResId = when (totalSessions) {
+                        10L -> R.drawable.bronze
+                        30L -> R.drawable.silver
+                        50L -> R.drawable.gold
+                        100L -> R.drawable.plat
+                        else -> null // Exclude items with total sessions other than 10, 30, 50, or 100
                     }
-                    else if (!title.isNullOrEmpty() && totalSessions == 30L) {
-                        accomplishmentsList.add(Accomplishment(title))
-                    }
-                    else if (!title.isNullOrEmpty() && totalSessions == 50L) {
-                        accomplishmentsList.add(Accomplishment(title))
-                    }
-                    else if (!title.isNullOrEmpty() && totalSessions == 100L) {
-                        accomplishmentsList.add(Accomplishment(title))
+                    if (!title.isNullOrEmpty() && badgeImgResId != null) {
+                        accomplishmentsList.add(Accomplishment(title, badgeImgResId))
                     }
                 }
-                // Create and set adapter
-                val adapter = AccomplishmentsAdapter(accomplishmentsList)
+
+                val adapter = AccomplishmentsAdapter(accomplishmentsList, requireContext())
+
                 accomplishmentsRecyclerView.adapter = adapter
             }.addOnFailureListener { exception ->
                 Log.e("WOAH", "Error getting user accomplishments $exception", exception)

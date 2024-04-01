@@ -2,4 +2,7 @@
 <resources>
     <dimen name="defWidth">21dp</dimen>
     <dimen name="defTextSize">20sp</dimen>
+
+    <dimen name="badge_image_width">32dp</dimen>
+    <dimen name="badge_image_height">32dp</dimen>
 </resources>
