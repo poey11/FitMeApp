@@ -11,7 +11,7 @@ import com.example.mobdeve.s13.payao.malcolm.fitme.HistoryFragment
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.StatsAdapter
-import com.example.mobdeve.s13.payao.malcolm.fitme.database.ExerciseDataHelper
+//import com.example.mobdeve.s13.payao.malcolm.fitme.database.ExerciseDataHelper
 import android.util.Log
 
 
@@ -43,11 +43,19 @@ class Instructions : AppCompatActivity() {
         // Fetch and display the instructions
         fetchInstructions()
 
+        val statsBtn: Button = findViewById(R.id.statsBtn)
+
         // Find the backBtn button
         val backBtn: Button = findViewById(R.id.backBtn)
 
         // Set OnClickListener to the backBtn button
         backBtn.setOnClickListener {
+            // Finish the activity and go back to the previous one
+            finish()
+        }
+
+        // Set OnClickListener to the backBtn button
+        statsBtn.setOnClickListener {
             // Finish the activity and go back to the previous one
             finish()
         }
