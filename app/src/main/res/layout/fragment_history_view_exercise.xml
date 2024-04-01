@@ -97,7 +97,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/josefin_sans"
                 android:gravity="center"
-                android:text="Session"
+                android:text="Sets"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 tools:visibility="visible" />
@@ -248,7 +248,7 @@
             android:layout_marginEnd="302dp"
             android:layout_marginBottom="157dp"
             android:fontFamily="@font/josefin_sans"
-            android:text="Total Session:"
+            android:text="Total Sets:"
             android:textSize="17sp"
             android:textStyle="bold|italic"
             app:layout_constraintBottom_toBottomOf="parent"
