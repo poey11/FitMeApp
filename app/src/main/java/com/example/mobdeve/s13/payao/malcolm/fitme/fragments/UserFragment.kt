@@ -86,19 +86,16 @@ class UserFragment : Fragment() {
     }
 
     private fun fetchUser(uID: String){
-        db.collection("userInfo").whereEqualTo("UID",uID).get()
-            .addOnSuccessListener{result ->
-                if(!result.isEmpty){
-                    val document = result.documents[0]
+
+        db.collection("userInfo").whereEqualTo("UID", uID).get()
+            .addOnSuccessListener { userInfoResult ->
+                if (!userInfoResult.isEmpty) {
+                    val document = userInfoResult.documents[0]
                     userFirstName = document.getString("fullName").toString()
-                    sessionsValueTV.text = document.getLong("Sessions").toString()
-                    volumeValueTV.text = document.getLong("Volume").toString()
-                    repsValueTV.text = document.getLong("Reps").toString()
                     firstNameTV.text = userFirstName
 
                     val photoUrl = document.getString("photoUrl")
                     if (!photoUrl.isNullOrEmpty()) {
-
                         Glide.with(this)
                             .load(photoUrl)
                             .placeholder(R.drawable.ic_baseline_user)
@@ -106,9 +103,34 @@ class UserFragment : Fragment() {
                             .into(userIconImageView)
                     }
                 }
-
-            }.addOnFailureListener{exception ->
+            }.addOnFailureListener { exception ->
                 Log.e("WOAH", "Error getting user data $exception", exception)
+            }
+
+
+        db.collection("userExercise").document(uID).collection("listOfPastExercise").get()
+            .addOnSuccessListener { exerciseResult ->
+                var totalSets = 0L
+                var totalReps = 0L
+                var totalKg = 0L
+
+                for (document in exerciseResult.documents) {
+                    val sets = document.getLong("Sets") ?: 0L
+                    val reps = document.getLong("Reps") ?: 0L
+                    val kg = document.getLong("Kg") ?: 0L
+
+                    totalSets += sets
+                    totalReps += reps
+                    totalKg += kg
+                }
+
+
+                sessionsValueTV.text = totalSets.toString()
+                volumeValueTV.text = totalKg.toString()
+                repsValueTV.text = totalReps.toString()
+
+            }.addOnFailureListener { exception ->
+                Log.e("WOAH", "Error getting user exercise data $exception", exception)
             }
     }
 
@@ -118,7 +140,7 @@ class UserFragment : Fragment() {
             .addOnSuccessListener { result ->
                 val accomplishmentsList = mutableListOf<Accomplishment>()
 
-                // Iterate through each document to aggregate sets for each exercise title
+
                 val setsMap = mutableMapOf<String, Long>()
                 for (document in result.documents) {
                     val title = document.getString("exTitle")
@@ -129,7 +151,7 @@ class UserFragment : Fragment() {
                     }
                 }
 
-                // Add accomplishments based on aggregated sets satisfying conditions
+
                 for ((title, totalSets) in setsMap) {
                     val badgeImgResId = when (totalSets) {
                         in 10..29 -> R.drawable.bronze
@@ -151,9 +173,6 @@ class UserFragment : Fragment() {
     }
 
 }
-
-
-
 
 
 
