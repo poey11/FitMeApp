@@ -27,6 +27,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 
 
+
+
 class UserFragment : Fragment() {
 
     private lateinit var accomplishmentsRecyclerView: RecyclerView
@@ -111,36 +113,47 @@ class UserFragment : Fragment() {
     }
 
 
-
-
     private fun fetchAccomplishments(uID: String) {
         db.collection("userExercise").document(uID).collection("listOfPastExercise").get()
             .addOnSuccessListener { result ->
                 val accomplishmentsList = mutableListOf<Accomplishment>()
+
+                // Iterate through each document to aggregate sets for each exercise title
+                val setsMap = mutableMapOf<String, Long>()
                 for (document in result.documents) {
                     val title = document.getString("exTitle")
-                    val totalSessions = document.getLong("totalSessions")
-                    val badgeImgResId = when (totalSessions) {
-                        10L -> R.drawable.bronze
-                        30L -> R.drawable.silver
-                        50L -> R.drawable.gold
-                        100L -> R.drawable.plat
-                        else -> null // Exclude items with total sessions other than 10, 30, 50, or 100
+                    val sets = document.getLong("Sets")
+
+                    if (!title.isNullOrEmpty() && sets != null) {
+                        setsMap[title] = (setsMap[title] ?: 0) + sets
                     }
-                    if (!title.isNullOrEmpty() && badgeImgResId != null) {
+                }
+
+                // Add accomplishments based on aggregated sets satisfying conditions
+                for ((title, totalSets) in setsMap) {
+                    val badgeImgResId = when (totalSets) {
+                        in 10..29 -> R.drawable.bronze
+                        in 30..49 -> R.drawable.silver
+                        in 50..99 -> R.drawable.gold
+                        else -> if (totalSets >= 100) R.drawable.plat else null
+                    }
+                    if (badgeImgResId != null) {
                         accomplishmentsList.add(Accomplishment(title, badgeImgResId))
                     }
                 }
 
+                // Set up RecyclerView adapter
                 val adapter = AccomplishmentsAdapter(accomplishmentsList, requireContext())
-
                 accomplishmentsRecyclerView.adapter = adapter
             }.addOnFailureListener { exception ->
                 Log.e("WOAH", "Error getting user accomplishments $exception", exception)
             }
     }
 
-
 }
+
+
+
+
 
 
