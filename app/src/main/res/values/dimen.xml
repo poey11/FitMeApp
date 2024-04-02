@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="defWidth">21dp</dimen>
-    <dimen name="defTextSize">20sp</dimen>
+    <dimen name="defWidth">1dp</dimen>
+    <dimen name="defTextSize">7.5sp</dimen>
+    <dimen name="defRight">23dp</dimen>
+    <dimen name="setDefRight">45dp</dimen>
 </resources>

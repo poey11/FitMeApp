@@ -1,24 +1,32 @@
 package com.example.mobdeve.s13.payao.malcolm.fitme.models
 
-import android.annotation.SuppressLint
+
+import android.app.ActionBar.LayoutParams
 import android.content.Intent
+import android.view.Gravity
 import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.appcompat.widget.AppCompatEditText
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.marginRight
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
 
-
-
 class CExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
     private val tvExerciseTitle: TextView = itemView.findViewById(R.id.exerciseTitle)
     private  val infoBtn : Button = itemView.findViewById(R.id.infoBtn)
     private  val incBtn : Button = itemView.findViewById(R.id.increaseBtn)
     private  val decBtn : Button = itemView.findViewById(R.id.decreaseBtn)
+    private  val setTVWith : TextView = itemView.findViewById(R.id.setNosTV)
+    private  val setET :EditText = itemView.findViewById(R.id.repsNosTV)
+    private  val setCB : CheckBox = itemView.findViewById(R.id.checkBox)
+    private val  setMainLY: LinearLayout = itemView.findViewById(R.id.mainLayoutInside)
+
     fun bind(exercise: String) {
         var nos = 2
         var mainLayout :LinearLayout = itemView.findViewById(R.id.linearLayout2)
@@ -30,43 +38,58 @@ class CExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             itemView.context.startActivity(intent)
         }
         incBtn.setOnClickListener {
-            // Create a new LinearLayout
             val newLinearLayout = LinearLayout(itemView.context)
-            newLinearLayout.orientation = LinearLayout.HORIZONTAL
-            val params = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            newLinearLayout.layoutParams = params
 
+            newLinearLayout.layoutParams = setMainLY.layoutParams
+            newLinearLayout.gravity = setMainLY.gravity
+            val setDefTextSize = itemView.context.resources.getDimensionPixelSize(R.dimen.defTextSize)
             val setTv = TextView(itemView.context)
             setTv.text = nos.toString()
+            setTv.textSize = setDefTextSize.toFloat()
+            setTv.gravity = setTVWith.gravity
+            setTv.typeface = setTVWith.typeface
+            setTv.layoutParams = setTVWith.layoutParams
 
-            // Fetch actual text size from dimension resource
-            val textSizePixels = itemView.context.resources.getDimensionPixelSize(R.dimen.defTextSize)
-            setTv.textSize = textSizePixels.toFloat()
+            val setRepET = AppCompatEditText(itemView.context)
+            val repParams = LayoutParams(setET.layoutParams.width, setET.layoutParams.height)
+            val right = itemView.context.resources.getDimensionPixelSize(R.dimen.defRight)
+            repParams.rightMargin =right
+            setRepET.hint = setET.hint
+            setRepET.inputType = setET.inputType
+            setRepET.textSize = setDefTextSize.toFloat()
+            setRepET.gravity = setET.gravity
+            setRepET.typeface = setET.typeface
+            setRepET.layoutParams =  repParams
 
-            setTv.typeface = ResourcesCompat.getFont(itemView.context, R.font.josefin_sans_semibold)
+            val setKgET = AppCompatEditText(itemView.context)
+            val setParams = LayoutParams(setET.layoutParams.width, setET.layoutParams.height)
+            val setRight = itemView.context.resources.getDimensionPixelSize(R.dimen.setDefRight)
+            setParams.rightMargin =setRight
+            setKgET.hint = setET.hint
+            setKgET.inputType = setET.inputType
+            setKgET.gravity =setET.gravity
+            setKgET.textSize = setDefTextSize.toFloat()
+            setKgET.typeface =setET.typeface
+            setKgET.layoutParams =setParams
 
-            val setTvParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT // Change to WRAP_CONTENT
-            )
-
-            setTv.layoutParams = setTvParams
+            val setCheckBox = AppCompatCheckBox(itemView.context)
+            setCheckBox.layoutParams =setCB.layoutParams
 
             newLinearLayout.addView(setTv)
-
-            // Find the mainLayout in the parent view
-             mainLayout = itemView.findViewById<LinearLayout>(R.id.linearLayout2) // Change to your actual mainLayout ID
+            newLinearLayout.addView(setRepET)
+            newLinearLayout.addView(setKgET)
+            newLinearLayout.addView(setCheckBox)
+            mainLayout = itemView.findViewById<LinearLayout>(R.id.linearLayout2)
             mainLayout.addView(newLinearLayout)
 
             nos++
         }
 
         decBtn.setOnClickListener {
-            nos--
-            mainLayout.removeViewAt(mainLayout.childCount-1)
+           if(nos>2){
+               nos--
+               mainLayout.removeViewAt(mainLayout.childCount-1)
+           }
         }
     }
 
