@@ -4,26 +4,26 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
 import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.CExerciseAdapter
-//import com.example.mobdeve.s13.payao.malcolm.fitme.models.C_exercise
-import com.example.mobdeve.s13.payao.malcolm.fitme.models.Circuit
+import com.example.mobdeve.s13.payao.malcolm.fitme.models.CExerciseViewHolder
 import com.example.mobdeve.s13.payao.malcolm.fitme.models.Workout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-
 class ViewWorkout : AppCompatActivity() {
 
+    private lateinit var exerciseViewHolder: CExerciseViewHolder
     private lateinit var workoutTitle: TextView
     private lateinit var recyclerView: RecyclerView
     private lateinit var exerciseTitles: List<String>
     private lateinit var exerciseAdapter: CExerciseAdapter
-
     private val db = FirebaseFirestore.getInstance()
 
     @SuppressLint("MissingInflatedId")
@@ -45,7 +45,49 @@ class ViewWorkout : AppCompatActivity() {
         backBtn.setOnClickListener {
             finish()
         }
+
+
+        val doneBtn: Button = findViewById(R.id.doneBtn)
+        doneBtn.setOnClickListener {
+            handleCheckedItems()
+            finish()
+        }
     }
+    private lateinit var title : String
+    private fun handleCheckedItems() {
+        val dynamicViews = exerciseAdapter.getDynamicViews()
+        val listOfDoneExercise = mutableListOf<String>()
+        for (i in 0 until exerciseAdapter.itemCount) {
+            val exerciseViewHolder = recyclerView.findViewHolderForAdapterPosition(i) as? CExerciseViewHolder
+            exerciseViewHolder?.let { viewHolder ->
+                val cb = viewHolder.itemView.findViewById<CheckBox>(R.id.checkBox)
+                title = viewHolder.itemView.findViewById<TextView>(R.id.exerciseTitle).text.toString()
+                if (cb.isChecked) {
+                    val setted = viewHolder.itemView.findViewById<TextView>(R.id.setNosTV)
+                    val repped = viewHolder.itemView.findViewById<EditText>(R.id.repsNosTV)
+                    val kged = viewHolder.itemView.findViewById<EditText>(R.id.kgNosTV)
+                    listOfDoneExercise.add("$title: ${setted.text} sets x ${repped.text} reps x ${kged.text} kg")
+                }
+            }
+            for (view in dynamicViews) {
+                val cb2 = view.findViewById<CheckBox>(R.id.checkBox)
+                if (cb2.isChecked) {
+                    val set = view.findViewById<TextView>(R.id.setNosTV)
+                    val reps = view.findViewById<EditText>(R.id.repsNosTV)
+                    val kg = view.findViewById<EditText>(R.id.kgNosTV)
+                    listOfDoneExercise.add("$title: ${set.text} sets x ${reps.text} reps x ${kg.text} kg")
+                }
+
+            }
+
+        }
+        for(i in 0 until listOfDoneExercise.size){
+            Log.d("WorkingTest", listOfDoneExercise[i])
+        }
+    }
+
+
+
 
     private fun fetchListOfExercises(workoutTitle: String) {
         val currentUser = FirebaseAuth.getInstance().currentUser
@@ -76,7 +118,10 @@ class ViewWorkout : AppCompatActivity() {
     private fun updateRecyclerView(exerciseTitles: List<String>) {
         this.exerciseTitles = exerciseTitles
         recyclerView.layoutManager = LinearLayoutManager(this)
-        exerciseAdapter = CExerciseAdapter(exerciseTitles)
+        exerciseAdapter = CExerciseAdapter(exerciseTitles) { holder ->
+            // Assign the reference to exerciseViewHolder when creating ViewHolder
+            exerciseViewHolder = holder
+        }
         recyclerView.adapter = exerciseAdapter
     }
 
