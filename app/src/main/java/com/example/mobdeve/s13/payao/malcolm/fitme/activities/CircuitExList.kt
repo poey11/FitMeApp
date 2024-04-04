@@ -22,7 +22,7 @@ class CircuitExList : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var exerciseAdapter: AddExerciseAdapter
     private  val listOfExercises: MutableList<String> = mutableListOf()
-    private  lateinit var  SearchBar:SearchView
+    private  lateinit var  searchBar:SearchView
     private lateinit var back: Button
     private lateinit var add: Button
     private lateinit var monCb:CheckBox
@@ -39,7 +39,7 @@ class CircuitExList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.circuits_exercise_list)
         val  currentWorkoutID= intent.getStringExtra("workoutID")
-        SearchBar = findViewById(R.id.searchExerciseSearchViewB)
+        searchBar = findViewById(R.id.searchExerciseSearchViewB)
         monCb = findViewById(R.id.checkBox1)
         tueCb = findViewById(R.id.checkBox2)
         wedCb = findViewById(R.id.checkBox3)
@@ -63,7 +63,7 @@ class CircuitExList : AppCompatActivity() {
         }
         fetchExercises()
         setupRecyclerView()
-        SearchExerceise()
+        searchExerceise()
     }
 
     private fun fetchExercises(){
@@ -82,8 +82,8 @@ class CircuitExList : AppCompatActivity() {
 
     }
 
-    private fun SearchExerceise(){
-        SearchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+    private fun searchExerceise(){
+        searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 fetchExercisesForMuscleOrQuery(query)
                 return true
