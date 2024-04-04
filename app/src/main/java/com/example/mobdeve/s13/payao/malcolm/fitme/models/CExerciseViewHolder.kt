@@ -57,10 +57,7 @@ class CExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             itemView.context.startActivity(intent)
         }
 
-        frameLayout.setOnClickListener {
-           Log.d("JUSTANNE", "exercise: $exercise, workoutID: $workoutID, eID: $eID")
 
-        }
 
         incBtn.setOnClickListener {
             val newLinearLayout = LinearLayout(itemView.context)
