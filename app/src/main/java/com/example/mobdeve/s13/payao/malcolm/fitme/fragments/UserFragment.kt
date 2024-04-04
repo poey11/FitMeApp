@@ -16,11 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.AccomplishmentsAdapter
-import com.example.mobdeve.s13.payao.malcolm.fitme.database.UserDataHelper
 import com.example.mobdeve.s13.payao.malcolm.fitme.models.Settings
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
 import com.example.mobdeve.s13.payao.malcolm.fitme.models.Accomplishment
-import com.google.android.play.integrity.internal.f
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -61,8 +59,6 @@ class UserFragment : Fragment() {
             fetchAccomplishments(currentUser.uid)
         }
 
-        val userDataList = UserDataHelper.initializeUserData()
-        val userData = userDataList[0]
 
 
 
