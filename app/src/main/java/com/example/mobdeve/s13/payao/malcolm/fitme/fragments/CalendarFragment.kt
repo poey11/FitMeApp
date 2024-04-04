@@ -1,4 +1,4 @@
-package com.example.mobdeve.s13.payao.malcolm.fitme
+package com.example.mobdeve.s13.payao.malcolm.fitme.fragments
 
 
 import android.os.Bundle
@@ -20,6 +20,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import android.content.Intent
+import android.widget.Toast
+import com.example.mobdeve.s13.payao.malcolm.fitme.CalendarAdapter
+import com.example.mobdeve.s13.payao.malcolm.fitme.R
 import com.example.mobdeve.s13.payao.malcolm.fitme.activities.ViewWorkout
 
 
@@ -110,17 +113,35 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener, ScheduledEx
         setMonthView()
     }
 
+
     override fun onItemClick(position: Int, dayText: String?) {
         if (!dayText.isNullOrEmpty()) {
+            // Parse the clicked dayText to an integer
+            val clickedDay = dayText.toInt()
+
+            // Get the day of the week abbreviation
+            val calendar = Calendar.getInstance()
+            calendar.set(selectedDate.get(Calendar.YEAR), selectedDate.get(Calendar.MONTH), clickedDay)
+            val dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault())
+
+
+            // Further implementation as needed
             val currentUser = FirebaseAuth.getInstance().currentUser
             val uid = currentUser?.uid
             uid?.let {
-                val dialog = MyBottomSheetDialogFragment.newInstance(dayText, it, this)
-                dialog.show(childFragmentManager, "MyBottomSheetDialogFragment")
-                dialog.fetchWorkouts(calendarRecyclerView.adapter as? ScheduledExerciseAdapter ?: return@let, it)
+                val dialog = dayOfWeek?.let { it1 ->
+                    MyBottomSheetDialogFragment.newInstance(dayText, it, this,
+                        it1
+                    )
+                }
+                dialog?.show(childFragmentManager, "MyBottomSheetDialogFragment")
+                dialog?.fetchWorkouts(calendarRecyclerView.adapter as? ScheduledExerciseAdapter ?: return@let, it)
             }
+
         }
     }
+
+
 
     // Handle click event for workout titles
     override fun onWorkoutTitleClick(workoutTitle: String, workoutID:String) {
@@ -133,14 +154,15 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener, ScheduledEx
 
 
 
-    class MyBottomSheetDialogFragment(private val listener: ScheduledExerciseAdapter.OnWorkoutTitleClickListener) : BottomSheetDialogFragment() {
+    class MyBottomSheetDialogFragment(private val listener: ScheduledExerciseAdapter.OnWorkoutTitleClickListener, private val day:String) : BottomSheetDialogFragment() {
+        private lateinit var dayName:String
         override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
         ): View? {
             val view = inflater.inflate(R.layout.calendar_bottomsheet, container, false)
-
+            dayName = dayConverter(day)
             // Retrieve UID from arguments
             val uid = arguments?.getString("uid") ?: ""
 
@@ -163,6 +185,18 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener, ScheduledEx
             return view
         }
 
+        private fun dayConverter(day: String): String {
+            when(day) {
+                "Sun" -> return "SU"
+                "Mon" -> return "M"
+                "Tue" -> return "T"
+                "Wed" -> return "W"
+                "Thu" -> return "TH"
+                "Fri" -> return "F"
+                "Sat" -> return "SA"
+            }
+            return ""
+        }
 
         fun fetchWorkouts(adapter: ScheduledExerciseAdapter, uid: String) {
             val uid = arguments?.getString("uid") // Retrieve the uid from arguments
@@ -182,9 +216,16 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener, ScheduledEx
                             // Extract workout title
                             val workoutTitle = document.getString("workoutTitle")
                             workoutTitle?.let {
-                                // Create a ScheduledExercise object with the workout title
-                                val scheduledExercise = ScheduledExercise(it, document.id)
-                                exercises.add(scheduledExercise)
+                                // Check if daysSet contains the current day
+                                val daysSet = document.getString("daysSet")
+                                if (daysSet != null) {
+                                    val days = daysSet.split(" ")
+                                    if (dayName in days) {
+                                        // Create a ScheduledExercise object with the workout title
+                                        val scheduledExercise = ScheduledExercise(it, document.id)
+                                        exercises.add(scheduledExercise)
+                                    }
+                                }
                             }
                         }
 
@@ -201,8 +242,8 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener, ScheduledEx
 
 
         companion object {
-            fun newInstance(dayText: String, uid: String, listener: ScheduledExerciseAdapter.OnWorkoutTitleClickListener): MyBottomSheetDialogFragment {
-                val fragment = MyBottomSheetDialogFragment(listener)
+            fun newInstance(dayText: String, uid: String, listener: ScheduledExerciseAdapter.OnWorkoutTitleClickListener, dayName:String): MyBottomSheetDialogFragment {
+                val fragment = MyBottomSheetDialogFragment(listener,dayName)
                 val args = Bundle()
                 args.putString("selectedDay", dayText)
                 args.putString("uid", uid) // Pass the UID as an argument
