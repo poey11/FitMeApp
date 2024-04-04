@@ -8,8 +8,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.recyclerview.widget.RecyclerView
@@ -35,14 +37,15 @@ class CExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private  var dynamicViews: MutableList<View> = mutableListOf()
     private val donBtn : Button = itemView.findViewById(R.id.button7)
     private  var mainLayout :LinearLayout = itemView.findViewById(R.id.linearLayout2)
+    private val frameLayout: FrameLayout = itemView.findViewById(R.id.frameLayout)
     private val auth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
     private lateinit var workoutID: String
     private lateinit var exerciseID: String
-    fun bind(exercise: String, workoutID: String,EID: String){
+    fun bind(exercise: String, workoutID: String,eID: String){
         var nos = 2
         this.workoutID = workoutID
-        this.exerciseID = EID
+        this.exerciseID = eID
         dynamicViews.clear()
         doneExercise.clear()
         tvExerciseTitle.text = exercise
@@ -52,6 +55,11 @@ class CExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 putExtra("exerciseTitle", exercise)
             }
             itemView.context.startActivity(intent)
+        }
+
+        frameLayout.setOnClickListener {
+           Log.d("JUSTANNE", "exercise: $exercise, workoutID: $workoutID, eID: $eID")
+
         }
 
         incBtn.setOnClickListener {
@@ -189,10 +197,9 @@ class CExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 .collection("listOfWorkouts").document(workoutID)
                 .collection("listOfExercises").document(exerciseID).delete()
                 .addOnSuccessListener {
-                    Log.d("JUSTANNE", "DocumentSnapshot successfully deleted! $exerciseID")
                 }
                 .addOnFailureListener { e ->
-                    Log.w("JUSTANNE", "Error deleting document", e)
+                    Log.w("CExerciseViewHolder", "Error deleting document", e)
                 }
         }
 

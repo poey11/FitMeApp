@@ -72,7 +72,7 @@ class ViewWorkout : AppCompatActivity() {
     }
 
 
-    private lateinit var EID:String
+
     private fun fetchListOfExercises(workoutID: String) {
         val currentUser = FirebaseAuth.getInstance().currentUser
         val uid = currentUser?.uid
@@ -85,14 +85,15 @@ class ViewWorkout : AppCompatActivity() {
                 .addOnSuccessListener { documents ->
 
                     val exerciseTitlesList: MutableList<String> = mutableListOf()
+                    val eID:MutableList<String> = mutableListOf()
                     for (document in documents) {
                         val exerciseTitle = document.getString("ExerciseTitle")
                         if (exerciseTitle != null) {
                             exerciseTitlesList.add(exerciseTitle)
-                            EID = document.id
+                            eID.add(document.id)
                         }
                     }
-                    updateRecyclerView(exerciseTitlesList, workoutID)
+                    updateRecyclerView(exerciseTitlesList, workoutID, eID)
                 }
                 .addOnFailureListener { exception ->
                     Log.e(TAG, "Error getting documents: ", exception)
@@ -100,9 +101,9 @@ class ViewWorkout : AppCompatActivity() {
         }
     }
 
-    private fun updateRecyclerView(exerciseTitles: MutableList<String>, workoutID: String) {
+    private fun updateRecyclerView(exerciseTitles: MutableList<String>, workoutID: String, exID : MutableList<String>){
         recyclerView.layoutManager = LinearLayoutManager(this)
-        exerciseAdapter = CExerciseAdapter(exerciseTitles, workoutID, EID)
+        exerciseAdapter = CExerciseAdapter(exerciseTitles, workoutID,exID)
         recyclerView.adapter = exerciseAdapter
     }
 

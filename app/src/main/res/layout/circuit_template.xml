@@ -9,6 +9,7 @@
     >
 
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:background="@drawable/circuit_shape"

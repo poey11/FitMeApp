@@ -8,7 +8,7 @@ import com.example.mobdeve.s13.payao.malcolm.fitme.R
 import com.example.mobdeve.s13.payao.malcolm.fitme.models.CExerciseViewHolder
 
 
-class CExerciseAdapter(private val data: MutableList<String>, private val workoutID:String, private val EID:String) : RecyclerView.Adapter<CExerciseViewHolder>() {
+class CExerciseAdapter(private val data: MutableList<String>, private val workoutID:String, private val eID: MutableList<String>) : RecyclerView.Adapter<CExerciseViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CExerciseViewHolder {
@@ -23,7 +23,8 @@ class CExerciseAdapter(private val data: MutableList<String>, private val workou
 
     override fun onBindViewHolder(holder: CExerciseViewHolder,  position: Int) {
         val cExercise: String = data[position]
-        holder.bind(cExercise,workoutID, EID)
+        val eID: String = eID[position]
+        holder.bind(cExercise,workoutID, eID)
         holder.itemView.findViewById<Button>(R.id.delBtn).setOnClickListener{
             removeCExerciseItem(position)
             holder.removeCExerciseItemAtDB()
@@ -33,6 +34,7 @@ class CExerciseAdapter(private val data: MutableList<String>, private val workou
    private fun removeCExerciseItem(position: Int) {
        data.removeAt(position)
        notifyItemRemoved(position)
+       notifyItemRangeChanged(position, itemCount - position)
    }
 
 
