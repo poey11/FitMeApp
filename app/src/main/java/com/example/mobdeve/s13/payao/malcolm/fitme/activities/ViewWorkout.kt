@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
 import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.CExerciseAdapter
 import com.example.mobdeve.s13.payao.malcolm.fitme.models.CExerciseViewHolder
+import com.example.mobdeve.s13.payao.malcolm.fitme.models.DoneExercise
 import com.example.mobdeve.s13.payao.malcolm.fitme.models.Workout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -56,17 +57,17 @@ class ViewWorkout : AppCompatActivity() {
     private lateinit var title : String
     private fun handleCheckedItems() {
         val dynamicViews = exerciseAdapter.getDynamicViews()
-        val listOfDoneExercise = mutableListOf<String>()
+        val listOfDoneExercise = mutableListOf<DoneExercise>()
         for (i in 0 until exerciseAdapter.itemCount) {
             val exerciseViewHolder = recyclerView.findViewHolderForAdapterPosition(i) as? CExerciseViewHolder
             exerciseViewHolder?.let { viewHolder ->
                 val cb = viewHolder.itemView.findViewById<CheckBox>(R.id.checkBox)
-                title = viewHolder.itemView.findViewById<TextView>(R.id.exerciseTitle).text.toString()
                 if (cb.isChecked) {
+                    title = viewHolder.itemView.findViewById<TextView>(R.id.exerciseTitle).text.toString()
                     val setted = viewHolder.itemView.findViewById<TextView>(R.id.setNosTV)
                     val repped = viewHolder.itemView.findViewById<EditText>(R.id.repsNosTV)
                     val kged = viewHolder.itemView.findViewById<EditText>(R.id.kgNosTV)
-                    listOfDoneExercise.add("$title: ${setted.text} sets x ${repped.text} reps x ${kged.text} kg")
+                    listOfDoneExercise.add(DoneExercise(title, repped.text.toString().toInt(), kged.text.toString().toFloat(), setted.text.toString().toInt()))
                 }
             }
             for (view in dynamicViews) {
@@ -75,17 +76,20 @@ class ViewWorkout : AppCompatActivity() {
                     val set = view.findViewById<TextView>(R.id.setNosTV)
                     val reps = view.findViewById<EditText>(R.id.repsNosTV)
                     val kg = view.findViewById<EditText>(R.id.kgNosTV)
-                    listOfDoneExercise.add("$title: ${set.text} sets x ${reps.text} reps x ${kg.text} kg")
+                    listOfDoneExercise.add(DoneExercise(title, reps.text.toString().toInt(), kg.text.toString().toFloat(), set.text.toString().toInt()))
                 }
 
             }
 
         }
-        for(i in 0 until listOfDoneExercise.size){
-            Log.d("WorkingTest", listOfDoneExercise[i])
+        listOfDoneExercise.distinct().forEach {
+            Log.d("WorkingTest", it.toString())
         }
     }
 
+    private  fun sendTOFB(listOfEx: List<DoneExercise>){
+
+    }
 
 
 
