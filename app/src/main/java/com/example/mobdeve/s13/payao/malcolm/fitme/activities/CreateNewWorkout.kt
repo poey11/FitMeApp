@@ -46,6 +46,7 @@ class CreateNewWorkout : AppCompatActivity() {
 
         val addBtn: Button = findViewById(R.id.addBtn)
 
+        /*
         // Set click listener for the "Add" button
         addBtn.setOnClickListener {
             // Get the workout title from the user input
@@ -59,6 +60,27 @@ class CreateNewWorkout : AppCompatActivity() {
             saveWorkoutToFirestore()
             finish()
         }
+         */
+
+        addBtn.setOnClickListener {
+            // Get the workout title from the user input
+            val workoutTitleEditText: EditText = findViewById(R.id.editTextText)
+            workoutTitle = workoutTitleEditText.text.toString()
+
+            // Get the selected exercises from the adapter
+            selectedExercises = exerciseAdapter.getSelectedExercises()
+
+            // Check if workoutTitle or selectedExercises is null or empty
+            if (workoutTitle.isEmpty() || selectedExercises.isEmpty()) {
+                // Show a toast message indicating that the user needs to fill in the necessary information
+                Toast.makeText(this, "Please enter workout title and select exercises.", Toast.LENGTH_SHORT).show()
+            } else {
+                // Save the workout title and selected exercises to Firestore
+                saveWorkoutToFirestore()
+                finish()
+            }
+        }
+
 
         backBtn.setOnClickListener {
             finish()
