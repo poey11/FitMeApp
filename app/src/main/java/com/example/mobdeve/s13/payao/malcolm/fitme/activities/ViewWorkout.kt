@@ -1,6 +1,7 @@
 package com.example.mobdeve.s13.payao.malcolm.fitme.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -26,6 +27,7 @@ class ViewWorkout : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.view_workout)
 
+        val addnewBtn = findViewById<Button>(R.id.addBtn)
         recyclerView = findViewById(R.id.circuitRecyclerView)
         workoutTitle = findViewById(R.id.textView2)
         val currentWorkout = intent.getSerializableExtra("currentWorkout") as? Workout
@@ -56,7 +58,16 @@ class ViewWorkout : AppCompatActivity() {
         backBtn.setOnClickListener {
             finish()
         }
-
+        addnewBtn.setOnClickListener{
+            val intent = Intent(this, CircuitExList::class.java)
+            if (currentWorkout != null) {
+                intent.putExtra("workoutID", currentWorkout.workoutID)
+            }else{
+                intent.putExtra("workoutID", currentWorkoutID)
+            }
+            startActivity(intent)
+            finish()
+        }
 
     }
 
@@ -90,7 +101,6 @@ class ViewWorkout : AppCompatActivity() {
     }
 
     private fun updateRecyclerView(exerciseTitles: MutableList<String>, workoutID: String) {
-
         recyclerView.layoutManager = LinearLayoutManager(this)
         exerciseAdapter = CExerciseAdapter(exerciseTitles, workoutID, EID)
         recyclerView.adapter = exerciseAdapter
