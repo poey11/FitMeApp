@@ -191,9 +191,10 @@
                 android:id="@+id/accomplishmentsTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:fontFamily="@font/josefin_sans_semibold"
                 android:text="Accomplishments"
                 android:textColor="#FFFFFF"
-                android:fontFamily="@font/josefin_sans_semibold"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
