@@ -4,4 +4,6 @@
     <dimen name="defTextSize">7.5sp</dimen>
     <dimen name="defRight">23dp</dimen>
     <dimen name="setDefRight">45dp</dimen>
+    <dimen name="badge_image_width">32dp</dimen>
+    <dimen name="badge_image_height">32dp</dimen>
 </resources>

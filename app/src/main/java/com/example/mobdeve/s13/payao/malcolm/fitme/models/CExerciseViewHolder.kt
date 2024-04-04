@@ -154,7 +154,7 @@ class CExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
        if(currentUser!=null){
            for (i in doneExercise){
                db.collection("userExercise").document(currentUser.uid)
-                   .collection("listofPastExercise").add(i).addOnSuccessListener {
+                   .collection("listOfPastExercise").add(i).addOnSuccessListener {
                        Log.d("TAG", "DocumentSnapshot added with ID: ${it.id}")
                    }
            }
@@ -182,6 +182,7 @@ class CExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     fun removeCExerciseItemAtDB() {
+        Log.d("JUSTANNE", "Position: $adapterPosition")
         val currentUser = auth.currentUser
         if (currentUser != null) {
             db.collection("userExercise").document(currentUser.uid)

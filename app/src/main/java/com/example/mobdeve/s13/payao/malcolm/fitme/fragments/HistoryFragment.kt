@@ -58,7 +58,6 @@ private fun fetchExerciseData() {
                         val sets = document.getLong("sets")?.toInt() ?: 0
                         val KG = document.getLong("kg")?.toInt() ?: 0
                         val instruction = document.getString("instruction") ?: ""
-
                         val exercise = Exercise(exerciseTitle, reps, sets, KG, instruction)
                         exercises[exerciseTitle] = exercise // Add exercise to the HashMap
                     }
