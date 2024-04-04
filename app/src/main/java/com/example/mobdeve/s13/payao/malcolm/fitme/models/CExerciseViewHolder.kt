@@ -1,13 +1,11 @@
 package com.example.mobdeve.s13.payao.malcolm.fitme.models
 
-import android.annotation.SuppressLint
+
 import android.content.Intent
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatEditText
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobdeve.s13.payao.malcolm.fitme.R

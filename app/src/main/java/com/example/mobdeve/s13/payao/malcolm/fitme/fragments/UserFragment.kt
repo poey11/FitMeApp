@@ -135,7 +135,7 @@ class UserFragment : Fragment() {
                 val setsMap = mutableMapOf<String, Long>()
                 for (document in result.documents) {
                     val title = document.getString("exTitle")
-                    val sets = document.getLong("Sets")
+                    val sets = document.getLong("sets")
 
                     if (!title.isNullOrEmpty() && sets != null) {
                         setsMap[title] = (setsMap[title] ?: 0) + sets

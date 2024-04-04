@@ -1,17 +1,12 @@
 package com.example.mobdeve.s13.payao.malcolm.fitme.models
 
-import android.content.Intent
+
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.mobdeve.s13.payao.malcolm.fitme.HistoryFragment
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
 import com.google.firebase.firestore.FirebaseFirestore
-import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.StatsAdapter
-//import com.example.mobdeve.s13.payao.malcolm.fitme.database.ExerciseDataHelper
 import android.util.Log
 
 
