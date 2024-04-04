@@ -24,11 +24,6 @@ import com.google.android.play.integrity.internal.f
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-
-
-
-
-
 class UserFragment : Fragment() {
 
     private lateinit var accomplishmentsRecyclerView: RecyclerView
