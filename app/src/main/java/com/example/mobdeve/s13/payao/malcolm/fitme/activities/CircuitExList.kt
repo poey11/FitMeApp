@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +22,7 @@ class CircuitExList : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var exerciseAdapter: AddExerciseAdapter
     private  val listOfExercises: MutableList<String> = mutableListOf()
+    private  lateinit var  SearchBar:SearchView
     private lateinit var back: Button
     private lateinit var add: Button
     private lateinit var monCb:CheckBox
@@ -37,7 +39,7 @@ class CircuitExList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.circuits_exercise_list)
         val  currentWorkoutID= intent.getStringExtra("workoutID")
-
+        SearchBar = findViewById(R.id.searchExerciseSearchViewB)
         monCb = findViewById(R.id.checkBox1)
         tueCb = findViewById(R.id.checkBox2)
         wedCb = findViewById(R.id.checkBox3)
@@ -56,11 +58,12 @@ class CircuitExList : AppCompatActivity() {
             if (currentWorkoutID != null) {
                 setDays(currentWorkoutID)
                 addNewExercise(currentWorkoutID)
+                finish()
             }
-            finish()
         }
         fetchExercises()
         setupRecyclerView()
+        SearchExerceise()
     }
 
     private fun fetchExercises(){
@@ -78,6 +81,59 @@ class CircuitExList : AppCompatActivity() {
 
 
     }
+
+    private fun SearchExerceise(){
+        SearchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                fetchExercisesForMuscleOrQuery(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                fetchExercisesForMuscleOrQuery(newText)
+                return true
+            }
+        })
+    }
+
+    private fun fetchExercisesForMuscleOrQuery( query: String?) {
+            if (query.isNullOrEmpty()) {
+                // Fetch all exercises when no muscle or query is specified
+                db.collection("exercises")
+                    .get()
+                    .addOnSuccessListener { result ->
+                        val exerciseNames = mutableListOf<String>()
+                        for (document in result) {
+                            val name = document.getString("name")
+                            name?.let { exerciseNames.add(it) }
+                        }
+                        exerciseAdapter.setData(exerciseNames)
+                    }
+                    .addOnFailureListener { exception ->
+                        // Handle errors
+                    }
+            } else {
+                db.collection("exercises")
+                    .orderBy("name") // Order by name to improve filtering efficiency
+                    .get()
+                    .addOnSuccessListener { result ->
+                        val exerciseNames = mutableListOf<String>()
+                        for (document in result) {
+                            val name = document.getString("name")
+                            name?.let {
+                                if (it.contains(query, ignoreCase = true)) { // Case-insensitive partial match
+                                    exerciseNames.add(it)
+                                }
+                            }
+                        }
+                        exerciseAdapter.setData(exerciseNames)
+                    }
+                    .addOnFailureListener { exception ->
+                        // Handle errors
+                    }
+
+            }
+        }
 
     private fun addNewExercise(workId: String) {
         selectedExercises = exerciseAdapter.getSelectedExercises()

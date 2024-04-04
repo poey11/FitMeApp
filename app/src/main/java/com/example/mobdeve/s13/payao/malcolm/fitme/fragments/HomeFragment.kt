@@ -48,6 +48,7 @@ class HomeFragment : Fragment(), WorkoutItemClickListener {
         }
 
         setupRecyclerView()
+        workoutAdapter.notifyDataSetChanged()
     }
 
     override fun onResume() {

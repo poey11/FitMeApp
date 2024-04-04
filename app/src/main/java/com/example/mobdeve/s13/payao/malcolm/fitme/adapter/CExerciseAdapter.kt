@@ -1,5 +1,6 @@
 package com.example.mobdeve.s13.payao.malcolm.fitme.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
@@ -24,18 +25,17 @@ class CExerciseAdapter(private val data: MutableList<String>, private val workou
     override fun onBindViewHolder(holder: CExerciseViewHolder,  position: Int) {
         val cExercise: String = data[position]
         val eID: String = eID[position]
-        holder.bind(cExercise,workoutID, eID)
-        holder.itemView.findViewById<Button>(R.id.delBtn).setOnClickListener{
-            removeCExerciseItem(position)
-            holder.removeCExerciseItemAtDB()
-        }
+        holder.bind(cExercise, this,workoutID, eID, position)
+
     }
 
-   private fun removeCExerciseItem(position: Int) {
-       data.removeAt(position)
-       notifyItemRemoved(position)
-       notifyItemRangeChanged(position, itemCount - position)
-   }
+    fun removeCExerciseItem(position: Int) {
+        data.removeAt(position)
+        eID.removeAt(position)
+
+        notifyDataSetChanged()
+    }
+
 
 
 

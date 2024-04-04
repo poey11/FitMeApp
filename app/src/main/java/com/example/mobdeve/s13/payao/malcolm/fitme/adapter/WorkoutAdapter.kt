@@ -42,6 +42,7 @@ class WorkoutAdapter(private val data: ArrayList<Workout>, private val context: 
         this.listener = listener
     }
 
+
     fun removeWorkoutItem(position: Int) {
         data.removeAt(position)
         notifyItemRemoved(position)
@@ -52,6 +53,8 @@ class WorkoutAdapter(private val data: ArrayList<Workout>, private val context: 
         val intent = Intent(context,  ViewWorkout::class.java)
         intent.putExtra("currentWorkout", currentWorkout)
         context.startActivity(intent)
+        notifyItemChanged(position)
+
     }
 
     fun getWorkoutItem(position: Int): Workout {

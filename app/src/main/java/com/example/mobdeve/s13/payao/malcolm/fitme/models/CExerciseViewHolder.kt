@@ -16,6 +16,7 @@ import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
+import com.example.mobdeve.s13.payao.malcolm.fitme.adapter.CExerciseAdapter
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -37,12 +38,12 @@ class CExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private  var dynamicViews: MutableList<View> = mutableListOf()
     private val donBtn : Button = itemView.findViewById(R.id.button7)
     private  var mainLayout :LinearLayout = itemView.findViewById(R.id.linearLayout2)
-    private val frameLayout: FrameLayout = itemView.findViewById(R.id.frameLayout)
+    private val delBtn : Button = itemView.findViewById(R.id.delBtn)
     private val auth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
     private lateinit var workoutID: String
     private lateinit var exerciseID: String
-    fun bind(exercise: String, workoutID: String,eID: String){
+    fun bind(exercise: String, adapter: CExerciseAdapter, workoutID: String, eID: String, index: Int){
         var nos = 2
         this.workoutID = workoutID
         this.exerciseID = eID
@@ -57,6 +58,10 @@ class CExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             itemView.context.startActivity(intent)
         }
 
+        delBtn.setOnClickListener{
+                adapter.removeCExerciseItem(index)
+                removeCExerciseItemAtDB()
+        }
 
 
         incBtn.setOnClickListener {
@@ -125,6 +130,7 @@ class CExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
 
 
+
     }
 
 
@@ -186,18 +192,13 @@ class CExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         decBtn.isEnabled = false
     }
 
-    fun removeCExerciseItemAtDB() {
-        Log.d("JUSTANNE", "Position: $adapterPosition")
+    private fun removeCExerciseItemAtDB() {
+
         val currentUser = auth.currentUser
         if (currentUser != null) {
             db.collection("userExercise").document(currentUser.uid)
                 .collection("listOfWorkouts").document(workoutID)
                 .collection("listOfExercises").document(exerciseID).delete()
-                .addOnSuccessListener {
-                }
-                .addOnFailureListener { e ->
-                    Log.w("CExerciseViewHolder", "Error deleting document", e)
-                }
         }
 
     }
