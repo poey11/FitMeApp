@@ -81,9 +81,9 @@ class Stats : AppCompatActivity() {
                     val exercises = ArrayList<Exercise>()
                     for (document in documents) {
                         val exTitle = document.getString("exTitle") ?: ""
-                        val reps = document.getLong("Reps")?.toInt() ?: 0
-                        val sets = document.getLong("Sets")?.toInt() ?: 0
-                        val kg = document.getLong("Kg")?.toInt() ?: 0
+                        val reps = document.getLong("reps")?.toInt() ?: 0
+                        val sets = document.getLong("sets")?.toInt() ?: 0
+                        val kg = document.getLong("kg")?.toInt() ?: 0
                         val instruction = document.getString("instruction") ?: ""
 
                         val exercise = Exercise(exTitle, reps, sets, kg, instruction)

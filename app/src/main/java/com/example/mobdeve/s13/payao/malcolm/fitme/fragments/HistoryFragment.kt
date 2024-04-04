@@ -56,7 +56,7 @@ private fun fetchExerciseData() {
                     if (!exercises.containsKey(exerciseTitle)) {
                         val reps = document.getLong("reps")?.toInt() ?: 0
                         val sets = document.getLong("sets")?.toInt() ?: 0
-                        val KG = document.getLong("KG")?.toInt() ?: 0
+                        val KG = document.getLong("kg")?.toInt() ?: 0
                         val instruction = document.getString("instruction") ?: ""
 
                         val exercise = Exercise(exerciseTitle, reps, sets, KG, instruction)
