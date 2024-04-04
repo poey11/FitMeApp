@@ -48,7 +48,6 @@ class HomeFragment : Fragment(), WorkoutItemClickListener {
         }
 
         setupRecyclerView()
-        workoutAdapter.notifyDataSetChanged()
     }
 
     override fun onResume() {
@@ -90,7 +89,7 @@ class HomeFragment : Fragment(), WorkoutItemClickListener {
 
                     // Update RecyclerView with retrieved workouts
                     workoutAdapter.setData(sortedWorkouts)
-
+                    workoutAdapter.notifyDataSetChanged()
                 }
                 .addOnFailureListener { exception ->
                     // Handle any errors
