@@ -29,10 +29,26 @@ class ViewWorkout : AppCompatActivity() {
         recyclerView = findViewById(R.id.circuitRecyclerView)
         workoutTitle = findViewById(R.id.textView2)
         val currentWorkout = intent.getSerializableExtra("currentWorkout") as? Workout
+        val currentWorkoutID= intent.getStringExtra("clickedWorkoutID")
+
+        // Retrieve the clicked workout title from the intent extras
+        val clickedWorkoutTitle = intent.getStringExtra("clickedWorkoutTitle")
+
 
         if (currentWorkout != null) {
             workoutTitle.text = currentWorkout.workoutTitle
             fetchListOfExercises(currentWorkout.workoutID)
+        }
+
+
+        if (!clickedWorkoutTitle.isNullOrEmpty()) {
+            workoutTitle.text = clickedWorkoutTitle
+            if (currentWorkoutID != null) {
+                fetchListOfExercises(currentWorkoutID)
+                Log.e("JUSTINEEEE", currentWorkoutID)
+            } else {
+                Log.e("JUSTINEEEE", "Current Workout ID is null")
+            }
         }
 
         val backBtn: Button = findViewById(R.id.button4)
@@ -42,10 +58,6 @@ class ViewWorkout : AppCompatActivity() {
         }
 
 
-        val doneBtn: Button = findViewById(R.id.doneBtn)
-        doneBtn.setOnClickListener {
-            finish()
-        }
     }
 
 
