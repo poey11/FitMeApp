@@ -166,27 +166,6 @@ class HomeFragment : Fragment(), WorkoutItemClickListener {
         }
     }
 
-/*
-    override fun onDeleteClicked(position: Int) {
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        val uid = currentUser?.uid
-
-        uid?.let { userId ->
-            val workoutId = workoutAdapter.getWorkoutItem(position).workoutID
-            db.collection("userExercise").document(userId)
-                .collection("listOfWorkouts").document(workoutId)
-                .delete()
-                .addOnSuccessListener {
-                    // Remove item locally from RecyclerView
-                    workoutAdapter.removeWorkoutItem(position)
-                }
-                .addOnFailureListener { exception ->
-                    Log.e(TAG, "Error deleting workout: ", exception)
-                }
-        }
-    }
-
- */
 
     override fun onDeleteClicked(position: Int) {
         val currentUser = FirebaseAuth.getInstance().currentUser

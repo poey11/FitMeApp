@@ -3,6 +3,7 @@ package com.example.mobdeve.s13.payao.malcolm.fitme.models
 
 import android.app.ActionBar.LayoutParams
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
@@ -13,6 +14,11 @@ import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobdeve.s13.payao.malcolm.fitme.R
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
+import kotlin.math.log
 
 class CExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -25,19 +31,29 @@ class CExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val setET :EditText = itemView.findViewById(R.id.repsNosTV)
     private val setKET :EditText = itemView.findViewById(R.id.kgNosTV)
     private val setCB : CheckBox = itemView.findViewById(R.id.checkBox)
-
-
-
-    fun bind(exercise: String, dynamicViews: MutableList<View>){
+    private  var doneExercise: MutableList<DoneExercise> = mutableListOf()
+    private  var dynamicViews: MutableList<View> = mutableListOf()
+    private val donBtn : Button = itemView.findViewById(R.id.button7)
+    private  var mainLayout :LinearLayout = itemView.findViewById(R.id.linearLayout2)
+    private val auth = FirebaseAuth.getInstance()
+    private val db = FirebaseFirestore.getInstance()
+    private lateinit var workoutID: String
+    private lateinit var exerciseID: String
+    fun bind(exercise: String, workoutID: String,EID: String){
         var nos = 2
-        var mainLayout :LinearLayout = itemView.findViewById(R.id.linearLayout2)
+        this.workoutID = workoutID
+        this.exerciseID = EID
+        dynamicViews.clear()
+        doneExercise.clear()
         tvExerciseTitle.text = exercise
+
         infoBtn.setOnClickListener {
             val intent = Intent(itemView.context, Instructions::class.java).apply {
                 putExtra("exerciseTitle", exercise)
             }
             itemView.context.startActivity(intent)
         }
+
         incBtn.setOnClickListener {
             val newLinearLayout = LinearLayout(itemView.context)
             newLinearLayout.layoutParams = setMainLY.layoutParams
@@ -79,6 +95,7 @@ class CExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val setCheckBox = AppCompatCheckBox(itemView.context)
             setCheckBox.layoutParams =setCB.layoutParams
             setCheckBox.id = setCB.id
+
             newLinearLayout.addView(setTv)
             newLinearLayout.addView(setRepET)
             newLinearLayout.addView(setKgET)
@@ -90,6 +107,11 @@ class CExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             nos++
         }
 
+        donBtn.setOnClickListener{
+            collectData()
+            disableButtons()
+        }
+
         decBtn.setOnClickListener {
            if(nos>2){
                nos--
@@ -97,11 +119,82 @@ class CExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
            }
         }
 
+
     }
 
-    fun getExerciseTitle(): String {
-        return tvExerciseTitle.text.toString()
+
+    private fun collectData(){
+
+        if(setCB.isChecked){
+            doneExercise.add(DoneExercise(tvExerciseTitle.text.toString(), setET.text.toString().toInt(), setKET.text.toString().toFloat(), setTVWith.text.toString().toInt()))
+        }
+        for (layout in dynamicViews) {
+            val checkBox = layout.findViewById<CheckBox>(R.id.checkBox)
+            if (checkBox.isChecked) {
+                val setTv = layout.findViewById<TextView>(R.id.setNosTV)
+                val setRepET = layout.findViewById<EditText>(R.id.repsNosTV)
+                val setKgET = layout.findViewById<EditText>(R.id.kgNosTV)
+
+                val setNumber = setTv.text.toString().toInt()
+                val repValue = setRepET.text.toString().toIntOrNull() ?: 0
+                val kgValue = setKgET.text.toString().toFloatOrNull() ?: 0.0
+
+                val doneExerciseItem = DoneExercise(tvExerciseTitle.text.toString(), repValue, kgValue.toFloat(), setNumber)
+                doneExercise.add(doneExerciseItem)
+            }
+
+
+        }
+
+        sendToDb()
     }
 
+    private fun sendToDb(){
+      val currentUser = auth.currentUser
+       if(currentUser!=null){
+           for (i in doneExercise){
+               db.collection("userExercise").document(currentUser.uid)
+                   .collection("listofPastExercise").add(i).addOnSuccessListener {
+                       Log.d("TAG", "DocumentSnapshot added with ID: ${it.id}")
+                   }
+           }
+
+
+       }
+    }
+    private fun disableButtons(){
+        setET.isEnabled = false
+        setKET.isEnabled = false
+        setCB.isEnabled = false
+
+        for (layout in dynamicViews) {
+            val checkBox = layout.findViewById<CheckBox>(R.id.checkBox)
+            val repET = layout.findViewById<EditText>(R.id.repsNosTV)
+            val kgET = layout.findViewById<EditText>(R.id.kgNosTV)
+            repET.isEnabled = false
+            kgET.isEnabled = false
+            checkBox.isEnabled = false
+        }
+
+        incBtn.isEnabled = false
+        donBtn.isEnabled = false
+        decBtn.isEnabled = false
+    }
+
+    fun removeCExerciseItemAtDB() {
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            db.collection("userExercise").document(currentUser.uid)
+                .collection("listOfWorkouts").document(workoutID)
+                .collection("listOfExercises").document(exerciseID).delete()
+                .addOnSuccessListener {
+                    Log.d("JUSTANNE", "DocumentSnapshot successfully deleted! $exerciseID")
+                }
+                .addOnFailureListener { e ->
+                    Log.w("JUSTANNE", "Error deleting document", e)
+                }
+        }
+
+    }
 
 }
