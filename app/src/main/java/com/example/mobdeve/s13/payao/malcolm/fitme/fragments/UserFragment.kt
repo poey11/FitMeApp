@@ -106,9 +106,9 @@ class UserFragment : Fragment() {
                 var totalKg = 0L
 
                 for (document in exerciseResult.documents) {
-                    val sets = document.getLong("Sets") ?: 0L
-                    val reps = document.getLong("Reps") ?: 0L
-                    val kg = document.getLong("Kg") ?: 0L
+                    val sets = document.getLong("sets") ?: 0L
+                    val reps = document.getLong("reps") ?: 0L
+                    val kg = document.getLong("kg") ?: 0L
 
                     totalSets += sets
                     totalReps += reps
